@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Tokens — the only file allowed to contain hex or rgb literals.
+
+   Layers:
+     1. Palette    raw brand colours. Existing hero CSS reads these directly.
+     2. Scales     type and spacing.
+     3. Semantic   --ui-*, --btn-*, --link, --focus-ring. New section CSS reads
+                   ONLY this layer, so dark surfaces invert automatically.
+
+   Breakpoints (media queries cannot read custom properties, so they are
+   listed here and must be kept in sync by hand):
+
+     compact     (max-width: 820px), (orientation: portrait) and (max-width: 1100px)
+                 Hero art direction + compact header. Also used in index.html
+                 <source media> and <link rel="preload" media>.
+     nav         (max-width: 1080px)  nav collapses to the hamburger.
+                 Mirrored in js/main.js as (min-width: 1081px).
+     short       (max-width: 820px) and (max-height: 700px)  short phones.
+     landscape   (orientation: landscape) and (max-height: 500px)  landscape phones.
+   ========================================================================== */
+
+:root {
+  /* ---------- 1. Palette ---------- */
+  --ink: #181715;            /* brand Charcoal */
+  --ink-soft: #3E332A;
+  --muted: #5F5E4E;          /* brand Muted Olive. Captions and labels only, never running copy */
+  --cream: #EDE2D7;          /* brand Ivory */
+  --sand: #E8D8C3;           /* brand Cream */
+  --accent: #AC3629;         /* brand Deep Terracotta. Action only */
+  --accent-hover: #8E2C22;
+  --ceiling: #DDB898;        /* NOT in the brand palette. Pending client approval.
+                                Mirrored in index.html <meta name="theme-color">; keep in sync. */
+  --forest: #212D25;         /* dark sections, footer */
+  --dark-alt: #333125;
+  --border: #C5A37B;
+  --border-strong: #857C71;
+  --error: #843E23;
+
+  /* rgb tuples for alpha: rgb(var(--ink-rgb) / .4). Must match the hex above. */
+  --ink-rgb: 24 23 21;
+  --cream-rgb: 237 226 215;
+  --ceiling-rgb: 221 184 152;
+
+  /* ---------- 2. Scales ---------- */
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-17: 17px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-22: 22px;
+  --fs-menu: clamp(28px, 8vw, 40px);
+  --fs-lede: clamp(16px, 1.32vw, 22px);
+  --fs-lede-compact: clamp(16px, 2.4vw, 20px);
+  --fs-display: clamp(44px, min(5.3vw, 9.4vh), 112px);
+  --fs-display-compact: clamp(44px, 13.8vw, 88px);
+  --fs-display-short: clamp(40px, 12vw, 52px);
+  --fs-display-landscape: clamp(30px, 9vh, 44px);
+
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-72: 72px;
+  --space-120: 120px;
+
+  --gutter: clamp(20px, 3.9vw, 56px);
+  --header-h: 90px;
+
+  /* ---------- 3. Semantic (light surface, the default) ---------- */
+  --ui-bg: var(--sand);
+  --ui-text: var(--ink);
+  --ui-text-secondary: var(--ink-soft);
+  --ui-caption: var(--muted);
+  --ui-border: var(--border);
+  --ui-border-strong: var(--border-strong);
+  --ui-error: var(--error);
+
+  /* Buttons on light: terracotta fill, ivory label, 18px bold minimum */
+  --btn-bg: var(--accent);
+  --btn-bg-hover: var(--accent-hover);
+  --btn-text: var(--cream);
+  --btn-font-size: var(--fs-18);
+  --btn-font-weight: 700;
+
+  --link: var(--ink);
+  --link-hover: var(--accent);
+  --link-underline: rgb(var(--ink-rgb) / .4);
+  --focus-ring: var(--accent);
+}
+
+@media (max-width: 820px), (orientation: portrait) and (max-width: 1100px) {
+  :root { --gutter: clamp(20px, 5.6vw, 48px); }
+}
+
+/* Dark surface: set data-surface="dark" on a section root.
+   Terracotta fails on forest (2.26:1), so it is never a fill or text colour here. */
+[data-surface="dark"] {
+  --ui-bg: var(--forest);
+  --ui-text: var(--cream);
+  --ui-text-secondary: color-mix(in srgb, var(--cream) 75%, var(--forest));
+  --ui-caption: color-mix(in srgb, var(--cream) 75%, var(--forest));
+  --ui-border: color-mix(in srgb, var(--cream) 20%, var(--forest));
+  --ui-border-strong: color-mix(in srgb, var(--cream) 45%, var(--forest));
+  --ui-error: var(--border);
+
+  --btn-bg: var(--cream);
+  --btn-bg-hover: var(--sand);
+  --btn-text: var(--ink);
+
+  --link: var(--cream);
+  --link-hover: var(--border);
+  --link-underline: rgb(var(--cream-rgb) / .4);
+  --focus-ring: var(--cream);
+}

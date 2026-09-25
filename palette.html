@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Giraffe palette</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <style>
+    /* Dev reference page. Every colour is read live from tokens.css; nothing is hardcoded. */
+    body { padding: var(--space-48) var(--gutter) var(--space-120); }
+    h1 { margin: 0 0 var(--space-8); font-weight: 300; font-size: clamp(32px, 6vw, 56px); letter-spacing: -0.02em; }
+    .intro { margin: 0 0 var(--space-48); max-width: 62ch; font-size: var(--fs-15); line-height: 1.6; color: var(--ui-text-secondary); }
+    h2 { margin: var(--space-72) 0 var(--space-8); font-weight: 400; font-size: var(--fs-22); }
+    h2 + p { margin: 0 0 var(--space-24); font-size: var(--fs-14); color: var(--ui-text-secondary); max-width: 62ch; line-height: 1.6; }
+    .dark-wrap { padding: var(--space-32) var(--space-24); border-radius: 12px; }
+    .dark-wrap h2 { margin-top: 0; }
+
+    .grid { display: grid; gap: var(--space-16); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .card { border: 1px solid var(--ui-border); border-radius: 12px; overflow: hidden; background: var(--ui-bg); }
+    .chip { height: 88px; display: flex; align-items: flex-end; padding: var(--space-12) var(--space-16); }
+    .chip span { font-size: var(--fs-12); letter-spacing: 0.08em; }
+    .meta { padding: var(--space-12) var(--space-16) var(--space-16); }
+    code, .name, .pair small { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    code { font-size: 0.9em; }
+    .name { font-size: var(--fs-14); font-weight: 400; }
+    .hex { font-size: var(--fs-12); letter-spacing: 0.06em; color: var(--ui-text-secondary); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .note { font-size: var(--fs-12); color: var(--ui-text-secondary); margin-top: var(--space-8); line-height: 1.5; }
+    table { width: 100%; margin-top: var(--space-12); border-collapse: collapse; font-size: var(--fs-12); font-variant-numeric: tabular-nums; }
+    td { padding: 5px 0; border-top: 1px solid var(--ui-border); }
+    td:nth-child(2) { text-align: right; padding-right: var(--space-8); }
+    td:last-child { text-align: right; width: 1%; white-space: nowrap; }
+    .mark { display: inline-block; min-width: 64px; padding: 2px 8px; border-radius: 999px; text-align: center; font-weight: 700; letter-spacing: 0.04em; border: 1px solid; }
+    .pass { color: var(--ui-text); background: var(--ui-bg); border-color: var(--ui-text); }
+    .large { color: var(--ui-text-secondary); background: var(--ui-bg); border-color: var(--ui-border-strong); border-style: dashed; }
+    .fail { color: var(--btn-text); background: var(--ui-error); border-color: var(--ui-error); }
+    [data-surface="dark"] .fail { color: var(--ink); }
+
+    .pairs { display: grid; gap: var(--space-12); }
+    .pair { display: grid; grid-template-columns: 1fr auto; gap: var(--space-12); align-items: center; padding: var(--space-12) var(--space-16); border-radius: 10px; }
+    .pair .sample { font-size: var(--fs-15); }
+    .pair .ratio { font-size: var(--fs-12); font-variant-numeric: tabular-nums; }
+    .legend { display: flex; flex-wrap: wrap; gap: var(--space-12) var(--space-24); font-size: var(--fs-12); margin-bottom: var(--space-24); align-items: center; }
+  </style>
+</head>
+<body>
+  <h1>Palette</h1>
+  <p class="intro">Every token as a swatch, with its measured contrast against Ivory (<code>--cream</code>), Cream (<code>--sand</code>) and Forest (<code>--forest</code>). Values are read live from <code>css/tokens.css</code>, so this page cannot drift from the site. WCAG 2.2: 4.5:1 for body text, 3:1 for large text (24px, or 18.66px bold) and UI edges.</p>
+
+  <div class="legend">
+    <span><span class="mark pass">AA</span> ≥ 4.5 any text</span>
+    <span><span class="mark large">Large</span> ≥ 3 large text / UI only</span>
+    <span><span class="mark fail">Fail</span> &lt; 3</span>
+  </div>
+
+  <h2>Palette</h2>
+  <p>Raw brand colours. The approved hero reads these directly; new sections must not.</p>
+  <div class="grid" id="palette"></div>
+
+  <h2>Semantic, light surface</h2>
+  <p>The default. New section CSS references only these.</p>
+  <div class="grid" id="semantic-light"></div>
+
+  <h2>Pairings that matter</h2>
+  <p>Foreground on the background it is actually used on.</p>
+  <div class="pairs" id="pairs"></div>
+
+  <div data-surface="dark" class="dark-wrap" style="margin-top: var(--space-72)">
+    <h2>Semantic, dark surface</h2>
+    <p>Resolved inside <code>data-surface="dark"</code>. Buttons invert to an Ivory fill; terracotta is never used here.</p>
+    <div class="grid" id="semantic-dark"></div>
+  </div>
+
+  <script>
+  (function () {
+    var PALETTE = [
+      ['--ink', 'Brand Charcoal'], ['--ink-soft', ''], ['--muted', 'Brand Muted Olive. Captions and labels only'],
+      ['--cream', 'Brand Ivory'], ['--sand', 'Brand Cream'], ['--accent', 'Brand Deep Terracotta. Action only'],
+      ['--accent-hover', ''], ['--ceiling', 'Not in brand palette. Pending client approval'],
+      ['--forest', 'Dark sections, footer'], ['--dark-alt', ''], ['--border', ''], ['--border-strong', ''], ['--error', '']
+    ];
+    var SEMANTIC = ['--ui-bg', '--ui-text', '--ui-text-secondary', '--ui-caption', '--ui-border', '--ui-border-strong',
+      '--ui-error', '--btn-bg', '--btn-bg-hover', '--btn-text', '--link', '--link-hover', '--link-underline', '--focus-ring'];
+    var PAIRS = [
+      ['Button label on button, light', '--btn-text', '--btn-bg', null],
+      ['Button label on hover, light', '--btn-text', '--btn-bg-hover', null],
+      ['Button label on button, dark', '--btn-text', '--btn-bg', 'dark'],
+      ['Button label on hover, dark', '--btn-text', '--btn-bg-hover', 'dark'],
+      ['Terracotta on Forest (forbidden)', '--accent', '--forest', null],
+      ['Body text on Cream', '--ink', '--sand', null],
+      ['Secondary text on Cream', '--ink-soft', '--sand', null],
+      ['Muted Olive on Cream (captions)', '--muted', '--sand', null],
+      ['Muted Olive on ceiling (hero eyebrow, phone)', '--muted', '--ceiling', null],
+      ['Link hover, terracotta on Cream', '--accent', '--sand', null],
+      ['Secondary text on Forest (75% mix)', '--ui-text-secondary', '--ui-bg', 'dark'],
+      ['Link hover on Forest', '--link-hover', '--ui-bg', 'dark'],
+      ['Error on Cream', '--error', '--sand', null]
+    ];
+
+    var darkRoot = document.querySelector('[data-surface="dark"]');
+
+    // Resolve a custom property to [r,g,b,a] by letting the browser compute it.
+    function resolve(token, scope) {
+      var probe = document.createElement('i');
+      probe.style.color = 'var(' + token + ')';
+      (scope || document.body).appendChild(probe);
+      var c = getComputedStyle(probe).color;
+      probe.remove();
+      var n = (c.match(/[\d.]+/g) || []).map(Number);
+      if (c.indexOf('color(srgb') === 0) return [n[0] * 255, n[1] * 255, n[2] * 255, n.length > 3 ? n[3] : 1];
+      return [n[0], n[1], n[2], n.length > 3 ? n[3] : 1];
+    }
+    function hex(c) {
+      return '#' + c.slice(0, 3).map(function (v) { return Math.round(v).toString(16).padStart(2, '0'); }).join('').toUpperCase()
+        + (c[3] < 1 ? ' @ ' + Math.round(c[3] * 100) + '%' : '');
+    }
+    function flatten(fg, bg) {
+      var a = fg[3];
+      return [0, 1, 2].map(function (i) { return fg[i] * a + bg[i] * (1 - a); });
+    }
+    function lum(c) {
+      var v = c.map(function (x) { x /= 255; return x <= 0.04045 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+      return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+    }
+    function ratio(fg, bg) {
+      var a = lum(flatten(fg, bg)), b = lum(bg);
+      return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    }
+    function mark(r) {
+      var cls = r >= 4.5 ? 'pass' : r >= 3 ? 'large' : 'fail';
+      var label = r >= 4.5 ? 'AA' : r >= 3 ? 'Large' : 'Fail';
+      return '<span class="mark ' + cls + '">' + label + '</span>';
+    }
+
+    var BGS = [['--cream', 'Ivory'], ['--sand', 'Cream'], ['--forest', 'Forest']].map(function (b) {
+      return { token: b[0], label: b[1], rgb: resolve(b[0]) };
+    });
+
+    function card(token, note, scope) {
+      var c = resolve(token, scope);
+      var rows = BGS.map(function (b) {
+        var r = ratio(c, b.rgb);
+        return '<tr><td>vs ' + b.label + '</td><td>' + r.toFixed(2) + ':1</td><td>' + mark(r) + '</td></tr>';
+      }).join('');
+      var el = document.createElement('div');
+      el.className = 'card';
+      el.innerHTML = '<div class="chip" style="background: var(' + token + '); color: ' + (lum(flatten(c, BGS[0].rgb)) > 0.3 ? 'var(--ink)' : 'var(--cream)') + '"><span>Aa</span></div>'
+        + '<div class="meta"><div class="name">' + token + '</div><div class="hex">' + hex(c) + '</div>'
+        + (note ? '<div class="note">' + note + '</div>' : '') + '<table>' + rows + '</table></div>';
+      return el;
+    }
+
+    var pal = document.getElementById('palette');
+    PALETTE.forEach(function (p) { pal.appendChild(card(p[0], p[1])); });
+    var sl = document.getElementById('semantic-light');
+    SEMANTIC.forEach(function (t) { sl.appendChild(card(t, '')); });
+    var sd = document.getElementById('semantic-dark');
+    SEMANTIC.forEach(function (t) { sd.appendChild(card(t, '', darkRoot)); });
+
+    var pairs = document.getElementById('pairs');
+    PAIRS.forEach(function (p) {
+      var scope = p[3] === 'dark' ? darkRoot : null;
+      var fg = resolve(p[1], scope), bg = resolve(p[2], scope);
+      var r = ratio(fg, bg);
+      var el = document.createElement('div');
+      el.className = 'pair';
+      if (scope) el.setAttribute('data-surface', 'dark');
+      el.style.background = 'var(' + p[2] + ')';
+      el.innerHTML = '<span class="sample" style="color: var(' + p[1] + ')">' + p[0] + '<br><small>' + p[1] + ' on ' + p[2] + '</small></span>'
+        + '<span class="ratio" style="color: var(' + p[1] + ')">' + r.toFixed(2) + ':1 ' + mark(r) + '</span>';
+      pairs.appendChild(el);
+    });
+  })();
+  </script>
+</body>
+</html>

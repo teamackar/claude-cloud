@@ -35,9 +35,24 @@ issues, what a reviewer should check.
 When a decision is needed, the plain-English version goes in "For Sayan"
 and the reasoning in "Technical".
 
+## Contrast rules
+
+- Buttons on light backgrounds: --accent fill, --cream label, 18px bold
+  minimum. Smaller labels fail on terracotta.
+- Buttons on dark backgrounds: --cream fill, --ink label. --accent fails
+  on --forest at 2.26:1 and must never be a fill there.
+- --muted is for captions and labels only, never running copy.
+- New section CSS references only the semantic layer (--ui-*, --btn-*,
+  --link, --focus-ring), never raw palette tokens. Mark dark section roots
+  with data-surface="dark" and the semantic layer inverts itself.
+- palette.html shows every token with measured contrast. Check it after
+  any token change.
+
 ## Do not
 
 - Never hardcode a hex or rgba value outside tokens.css.
+  Sole exception: `<meta name="theme-color">`, which cannot read CSS
+  variables. It mirrors --ceiling and carries a keep-in-sync comment.
 - Never write inline !important styles from JavaScript.
 - Use MutationObserver for anything depending on deferred rendering.
 - Never link a PNG from /art directly. Each is about 5x the page budget.

@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Giraffe — Sound Belongs Everywhere</title>
   <meta name="description" content="Ceiling speakers designed for spaces worth living in. Sold in pairs.">
+  <!-- Mirrors --ceiling in css/tokens.css. Meta tags cannot read CSS variables; keep in sync. -->
   <meta name="theme-color" content="#DDB898">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jost-latin-var.woff2" crossorigin>
 
   <!-- Preload whichever hero image this viewport will actually use -->
   <link rel="preload" as="image" type="image/webp"
@@ -19,7 +18,9 @@
         media="(min-width: 821px) and (orientation: landscape), (min-width: 1101px)"
         imagesrcset="assets/hero-wide-1600.webp 1600w, assets/hero-wide-2560.webp 2560w" imagesizes="100vw">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
@@ -67,7 +68,7 @@
                 srcset="assets/hero-portrait.jpg">
         <source type="image/webp"
                 srcset="assets/hero-wide-1600.webp 1600w, assets/hero-wide-2560.webp 2560w" sizes="100vw">
-        <img src="assets/hero-wide.jpg" alt="Illustrated living room: a man with a coffee cup leans by an arched window, looking up at a ceiling speaker while a cat naps under the armchair." fetchpriority="high" decoding="async">
+        <img src="assets/hero-wide.jpg" alt="Illustrated living room: a man with a coffee cup leans by an arched window, looking up at a ceiling speaker while a cat naps under the armchair." fetchpriority="high">
       </picture>
 
       <div class="hero-content">
