@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #E9DFCE; }
+  body { font-family: Jost, system-ui, sans-serif; color: #2A2320; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #2A2320; text-decoration: none; }
+  a:hover { color: #B5462A; }
+  @keyframes sog-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+</style>
+</helmet>
+
+<div style="width:100%; background:#E9DFCE; overflow:hidden">
+
+  <section style="position:relative; width:100%; min-height:min(92vh, 900px); display:grid; grid-template-rows:auto 1fr auto; isolation:isolate; padding-bottom:26px">
+
+    <div style="position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0.5; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.28'/></svg>&quot;)"></div>
+
+    <header style="position:relative; z-index:3; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:26px clamp(20px,4vw,56px) 0; flex-wrap:wrap">
+      <a href="#" style="font-size:26px; font-weight:400; letter-spacing:0.01em; line-height:1">giraffe</a>
+      <nav style="display:flex; gap:clamp(18px,2.6vw,40px); align-items:center; font-size:14px; letter-spacing:0.04em; flex-wrap:wrap">
+        <a href="#">Products</a>
+        <a href="#">Spaces</a>
+        <a href="#">Our Story</a>
+        <a href="#">For Professionals</a>
+        <a href="#">Support</a>
+      </nav>
+      <div style="display:flex; gap:22px; font-size:14px; letter-spacing:0.04em">
+        <a href="#">Search</a>
+        <a href="#">Cart (0)</a>
+      </div>
+    </header>
+
+    <div style="position:relative; z-index:3; display:flex; flex-wrap:wrap; align-items:stretch">
+      <div style="flex:1 1 380px; min-width:0; display:flex; align-items:center; padding:clamp(40px,7vh,90px) clamp(20px,4vw,56px)">
+        <div style="width:100%">
+        <p style="margin:0 0 clamp(18px,3vh,30px); font-size:12px; letter-spacing:0.42em; text-transform:uppercase; color:#6B5B4B">Spaces sound better</p>
+        <h1 style="margin:0; font-weight:300; font-size:clamp(36px,7vw,104px); line-height:0.96; letter-spacing:-0.025em; text-wrap:balance">Sound<br />Belongs<br />Everywhere.</h1>
+        <p style="margin:clamp(22px,3.4vh,34px) 0 0; font-size:clamp(17px,1.4vw,22px); line-height:1.5; max-width:30ch; color:#44382E">Ceiling speakers designed for spaces worth living in. Two of them, in fact.</p>
+        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:clamp(28px,4vh,44px)">
+          <a href="#" style="display:inline-flex; align-items:center; gap:16px; padding:15px 28px; border:1px solid #2A2320; border-radius:999px; font-size:15px; letter-spacing:0.02em; background:transparent" style-hover="background:#2A2320; color:#EFE6D8">Explore Products <span style="font-size:17px; line-height:1">&#8594;</span></a>
+          <a href="#" style="padding:15px 6px; font-size:15px; letter-spacing:0.02em; border-bottom:1px solid rgba(42,35,32,0.35)">Find your animal</a>
+        </div>
+        </div>
+      </div>
+      <div style="flex:1 1 440px; min-width:0; min-height:min(52vh, 520px); background-image:url('art/hero-living-room.png'); background-size:cover; background-position:92% 100%; background-repeat:no-repeat"></div>
+    </div>
+
+    <div style="position:relative; z-index:3; display:flex; align-items:flex-end; justify-content:space-between; gap:20px; padding:0 clamp(20px,4vw,56px) 28px; font-size:11px; letter-spacing:0.34em; text-transform:uppercase; color:#6B5B4B; flex-wrap:wrap">
+      <span style="display:inline-flex; align-items:center; gap:14px; color:#6B5B4B"><span style="animation:sog-bob 2.6s ease-in-out infinite; font-size:14px">&#8595;</span> Scroll to explore</span>
+      <span style="display:inline-flex; align-items:center; gap:14px">Music for better days <span style="width:clamp(24px,5vw,64px); height:1px; background:#6B5B4B"></span></span>
+    </div>
+  </section>
+
+  <sc-if value="{{ showMoodBand }}" hint-placeholder-val="{{ true }}">
+  <section style="background:#14332A; color:#EFE6D8; padding:clamp(56px,8vw,104px) clamp(20px,4vw,56px)">
+    <div style="max-width:1280px; margin:0 auto">
+      <div style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:clamp(36px,5vw,60px)">
+        <h2 style="margin:0; font-weight:300; font-size:clamp(30px,3.6vw,54px); line-height:1.05; letter-spacing:-0.02em; max-width:22ch">Every room has a personality. So does every listener.</h2>
+        <p style="margin:0; font-family:Newsreader, Georgia, serif; font-style:italic; font-weight:300; font-size:clamp(17px,1.5vw,21px); line-height:1.6; max-width:34ch; color:#C8BBA6">Our herd stands in for the way you listen — pick the one that sounds like your evenings.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:clamp(18px,2.2vw,30px)">
+        <article style="display:flex; flex-direction:column; gap:20px">
+          <div style="aspect-ratio:3/4; border-radius:280px 280px 8px 8px; overflow:hidden; background:#0E2620 url('art/calm-cat.png') center/cover no-repeat"></div>
+          <div>
+            <p style="margin:0 0 8px; font-size:11px; letter-spacing:0.34em; text-transform:uppercase; color:#A8977F">The Cat</p>
+            <h3 style="margin:0 0 8px; font-weight:400; font-size:clamp(20px,1.8vw,26px); letter-spacing:-0.01em">Slow Sunday</h3>
+            <p style="margin:0; font-size:15px; line-height:1.6; color:#C8BBA6">Warm mids, unhurried bass. Built for jazz at low volume and long afternoons.</p>
+          </div>
+        </article>
+        <article style="display:flex; flex-direction:column; gap:20px">
+          <div style="aspect-ratio:3/4; border-radius:280px 280px 8px 8px; overflow:hidden; background:#0E2620 url('art/party-cheetah.png') center/cover no-repeat"></div>
+          <div>
+            <p style="margin:0 0 8px; font-size:11px; letter-spacing:0.34em; text-transform:uppercase; color:#A8977F">The Cheetah</p>
+            <h3 style="margin:0 0 8px; font-weight:400; font-size:clamp(20px,1.8vw,26px); letter-spacing:-0.01em">Party Pace</h3>
+            <p style="margin:0; font-size:15px; line-height:1.6; color:#C8BBA6">Fast transients, wide dispersion. Fills the whole floor without shouting at it.</p>
+          </div>
+        </article>
+        <article style="display:flex; flex-direction:column; gap:20px">
+          <div style="aspect-ratio:3/4; border-radius:280px 280px 8px 8px; overflow:hidden; background:#0E2620 url('art/giraffe-portrait.png') center/cover no-repeat"></div>
+          <div>
+            <p style="margin:0 0 8px; font-size:11px; letter-spacing:0.34em; text-transform:uppercase; color:#A8977F">The Giraffe</p>
+            <h3 style="margin:0 0 8px; font-weight:400; font-size:clamp(20px,1.8vw,26px); letter-spacing:-0.01em">Head In The Ceiling</h3>
+            <p style="margin:0; font-size:15px; line-height:1.6; color:#C8BBA6">Sound from above, out of sight. The whole point of the brand, standing very tall.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showMoodBand&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showMoodBand: this.props.showMoodBand ?? true };
+  }
+}
+</script>
+</body>
+</html>

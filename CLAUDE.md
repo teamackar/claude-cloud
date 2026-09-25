@@ -1,0 +1,62 @@
+# CLAUDE.md
+
+Read PROJECT.md and this file at the start of every session. PROJECT.md is
+imported below so it loads automatically; ASSETS.md governs all artwork.
+
+@PROJECT.md
+
+Do not rebuild the hero. `index.html`, its CSS and its assets are approved
+and stay as they are except where explicitly stated in later instructions.
+
+## Communication rules
+
+End every piece of work with two clearly separated sections.
+
+### For Sayan
+
+Plain English, no jargon, maximum 200 words. What I can now see and do,
+described as a person using the site. What it looks like, in words a
+non-developer understands. Anything I need to decide, phrased as a
+real-world choice with your recommendation and the trade-off. Anything I
+need to provide before you continue.
+
+Never use here: token names, hex codes, contrast ratios, file paths, CSS
+or JS terminology, framework names, or anything in backticks.
+
+Instead of "--text-invert on --action measures 4.97:1", write "button
+labels need to be slightly larger than usual so the text stays readable
+on the terracotta".
+
+### Technical
+
+Files changed, decisions, measurements, architecture, trade-offs, known
+issues, what a reviewer should check.
+
+When a decision is needed, the plain-English version goes in "For Sayan"
+and the reasoning in "Technical".
+
+## Do not
+
+- Never hardcode a hex or rgba value outside tokens.css.
+- Never write inline !important styles from JavaScript.
+- Use MutationObserver for anything depending on deferred rendering.
+- Never link a PNG from /art directly. Each is about 5x the page budget.
+- Never deploy /design. It pulls React, ReactDOM and Babel, about 3MB.
+- Never write copy implying single speakers are sold.
+
+## Always
+
+- Use MutationObserver for anything depending on deferred rendering.
+- Mobile first. Verify at 375px before anything else.
+
+## Performance budget
+
+Under 1.5MB per page, LCP under 2.5s on a mid-range Android. Current pages
+run 78KB to 143KB, so there is plenty of headroom. Protect it.
+
+## Git
+
+Commit after every working section. Message format:
+`section(<name>): <what changed>`. Flag any asset over 5MB before committing,
+except the PNG masters in /art, which are source files and are expected to
+be large.

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Giraffe — Sound Belongs Everywhere</title>
+  <meta name="description" content="Ceiling speakers designed for spaces worth living in. Sold in pairs.">
+  <meta name="theme-color" content="#DDB898">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Preload whichever hero image this viewport will actually use -->
+  <link rel="preload" as="image" type="image/webp"
+        media="(max-width: 820px), (orientation: portrait) and (max-width: 1100px)"
+        imagesrcset="assets/hero-portrait-900.webp 900w, assets/hero-portrait-1440.webp 1440w" imagesizes="100vw">
+  <link rel="preload" as="image" type="image/webp"
+        media="(min-width: 821px) and (orientation: landscape), (min-width: 1101px)"
+        imagesrcset="assets/hero-wide-1600.webp 1600w, assets/hero-wide-2560.webp 2560w" imagesizes="100vw">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="#" class="logo">giraffe</a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="#">Products</a>
+      <a href="#">Spaces</a>
+      <a href="#">Our Story</a>
+      <a href="#">Upcoming</a>
+      <a href="#">Register Warranty</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#" class="action-search">Search</a>
+      <a href="#" class="action-cart">Cart <span class="cart-count">(0)</span></a>
+      <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#">Products</a>
+      <a href="#">Spaces</a>
+      <a href="#">Our Story</a>
+      <a href="#">Upcoming</a>
+      <a href="#">Register Warranty</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="#">Search</a>
+      <a href="#">Cart (0)</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <picture class="hero-media">
+        <source type="image/webp"
+                media="(max-width: 820px), (orientation: portrait) and (max-width: 1100px)"
+                srcset="assets/hero-portrait-900.webp 900w, assets/hero-portrait-1440.webp 1440w" sizes="100vw">
+        <source media="(max-width: 820px), (orientation: portrait) and (max-width: 1100px)"
+                srcset="assets/hero-portrait.jpg">
+        <source type="image/webp"
+                srcset="assets/hero-wide-1600.webp 1600w, assets/hero-wide-2560.webp 2560w" sizes="100vw">
+        <img src="assets/hero-wide.jpg" alt="Illustrated living room: a man with a coffee cup leans by an arched window, looking up at a ceiling speaker while a cat naps under the armchair." fetchpriority="high" decoding="async">
+      </picture>
+
+      <div class="hero-content">
+        <p class="eyebrow">Spaces sound better</p>
+        <h1>Sound<br>Belongs<br>Everywhere.</h1>
+        <p class="lede">Ceiling speakers designed for spaces worth living in. Sold in pairs.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn">Explore Products <span aria-hidden="true">&#8594;</span></a>
+          <a href="#" class="link-underline">Find your animal</a>
+        </div>
+      </div>
+
+      <a href="#next" class="scroll-cue"><span class="scroll-arrow" aria-hidden="true">&#8595;</span> Scroll to explore</a>
+    </section>
+
+    <div id="next"></div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

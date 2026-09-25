@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #D9CDBA; }
+  body { font-family: Jost, system-ui, sans-serif; color: #2A2320; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #2A2320; text-decoration: none; }
+  a:hover { color: #B5462A; }
+  @keyframes sog-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+</style>
+</helmet>
+
+<section style="padding:64px; display:flex; flex-direction:column; gap:28px">
+  <p style="margin:0; font-size:13px; letter-spacing:0.3em; text-transform:uppercase; color:#6B5B4B">Turn 2 — Hero, desktop + phone</p>
+  <div style="display:flex; flex-wrap:wrap; gap:64px; align-items:flex-start">
+
+    <div id="2a" style="display:flex; flex-direction:column; gap:14px">
+      <span style="align-self:flex-start; padding:5px 12px; border-radius:999px; background:#2A2320; color:#EFE6D8; font-size:13px; letter-spacing:0.08em">2a · Desktop 1440</span>
+      <div data-screen-label="Hero Desktop" style="position:relative; width:1440px; height:810px; overflow:hidden; background:#E6D5BF url('art/hero-wide.png') center/cover no-repeat; box-shadow:0 30px 80px rgba(42,35,32,0.18)">
+        <header style="position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:30px 56px">
+          <a href="#" style="font-size:28px; font-weight:400; line-height:1">giraffe</a>
+          <nav style="display:flex; gap:40px; font-size:14px; letter-spacing:0.04em">
+            <a href="#">Products</a>
+            <a href="#">Spaces</a>
+            <a href="#">Our Story</a>
+            <a href="#">Upcoming</a>
+            <a href="#">Register Warranty</a>
+          </nav>
+          <div style="display:flex; gap:24px; font-size:14px; letter-spacing:0.04em">
+            <a href="#">Search</a>
+            <a href="#">Cart (0)</a>
+          </div>
+        </header>
+
+        <div style="position:absolute; left:56px; top:104px; width:640px">
+          <p style="margin:0 0 22px; font-size:12px; letter-spacing:0.42em; text-transform:uppercase; color:#5E4F41">Spaces sound better</p>
+          <h1 style="margin:0; font-weight:300; font-size:76px; line-height:0.96; letter-spacing:-0.025em">Sound<br />Belongs<br />Everywhere.</h1>
+          <p style="margin:18px 0 0; font-size:19px; line-height:1.5; color:#3E332A">Ceiling speakers designed for spaces worth living in. Sold in pairs.</p>
+          <div style="display:flex; gap:22px; align-items:center; margin-top:24px">
+            <a href="#" style="display:inline-flex; align-items:center; gap:16px; padding:15px 28px; border:1px solid #2A2320; border-radius:999px; font-size:15px; letter-spacing:0.02em" style-hover="background:#2A2320; color:#EFE6D8">Explore Products <span style="font-size:17px; line-height:1">&#8594;</span></a>
+            <a href="#" style="padding:6px 2px; font-size:15px; letter-spacing:0.02em; border-bottom:1px solid rgba(42,35,32,0.4)">Find your animal</a>
+          </div>
+        </div>
+
+        <div style="position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-between; align-items:flex-end; padding:0 56px 30px; font-size:11px; letter-spacing:0.34em; text-transform:uppercase">
+          <span></span>
+          <span style="display:inline-flex; align-items:center; gap:14px; color:#EFE6D8; padding:8px 14px; border-radius:999px; background:rgba(42,35,32,0.55)"><span style="animation:sog-bob 2.6s ease-in-out infinite; font-size:14px">&#8595;</span> Scroll to explore</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="2b" style="display:flex; flex-direction:column; gap:14px">
+      <span style="align-self:flex-start; padding:5px 12px; border-radius:999px; background:#2A2320; color:#EFE6D8; font-size:13px; letter-spacing:0.08em">2b · Phone 390</span>
+      <div data-screen-label="Hero Phone" style="position:relative; width:390px; height:844px; overflow:hidden; border-radius:44px; background:linear-gradient(to bottom, #DDB898 0, #DDB898 272px, rgba(221,184,152,0) 330px), url('art/hero-portrait.png') center bottom/100% auto no-repeat, #DDB898; box-shadow:0 30px 80px rgba(42,35,32,0.22); border:10px solid #2A2320">
+        <header style="position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:52px 22px 0">
+          <a href="#" style="font-size:24px; font-weight:400; line-height:1">giraffe</a>
+          <div style="display:flex; gap:6px; align-items:center">
+            <a href="#" style="display:flex; align-items:center; justify-content:center; width:44px; height:44px; font-size:13px; letter-spacing:0.04em">Cart</a>
+            <a href="#" aria-label="Menu" style="display:flex; flex-direction:column; justify-content:center; gap:6px; width:44px; height:44px; padding:0 10px">
+              <span style="display:block; height:1.5px; background:#2A2320"></span>
+              <span style="display:block; height:1.5px; background:#2A2320; width:70%; margin-left:auto"></span>
+            </a>
+          </div>
+        </header>
+
+        <div style="position:absolute; left:22px; right:22px; top:112px">
+          <p style="margin:0 0 18px; font-size:11px; letter-spacing:0.38em; text-transform:uppercase; color:#5E4F41">Spaces sound better</p>
+          <h1 style="margin:0; font-weight:300; font-size:54px; line-height:0.98; letter-spacing:-0.025em">Sound<br />Belongs<br />Everywhere.</h1>
+          <p style="margin:18px 0 0; font-size:16px; line-height:1.5; max-width:26ch; color:#3E332A">Ceiling speakers designed for spaces worth living in. Sold in pairs.</p>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px; margin-top:22px">
+            <a href="#" style="display:inline-flex; align-items:center; gap:14px; min-height:48px; padding:0 24px; border:1px solid #2A2320; border-radius:999px; font-size:15px; letter-spacing:0.02em; background:rgba(42,35,32,0.92); color:#EFE6D8">Explore Products <span style="font-size:17px; line-height:1">&#8594;</span></a>
+            <a href="#" style="display:inline-flex; align-items:center; min-height:44px; padding:0 2px; font-size:15px; letter-spacing:0.02em; text-decoration:underline; text-underline-offset:5px; text-decoration-color:rgba(42,35,32,0.45)">Find your animal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+</body>
+</html>
