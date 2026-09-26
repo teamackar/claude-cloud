@@ -11,8 +11,9 @@
      over it at positions from the script's CONFIG.
 
    Breakpoints: portrait art below 768px (matches the <source media>), wide
-   art from 768px. From 1081px (tokens.css "nav") the lede joins the heading
-   inside the image; below that the image is too short for it. */
+   art from 768px. From 1200px the lede joins the heading inside the image;
+   below that the image is too short to hold it clear of the active label
+   (only 7px of space at 1081). */
 
 .how-it-works {
   /* No top padding: the illustration starts where the hero ends */
@@ -24,8 +25,7 @@
 .how-it-works .hiw-stage {
   display: grid;
   grid-template-areas: "canvas" "lede";
-  max-width: 1440px;
-  margin-inline: auto;
+  /* Full bleed at every width, like the hero */
 }
 
 .how-it-works .hiw-canvas {
@@ -182,9 +182,10 @@
 /* ---------- The honest note ---------- */
 
 .how-it-works .hiw-note {
-  max-width: 1440px;
-  margin: var(--space-32) auto 0;
-  padding-inline: var(--gutter) max(var(--gutter), calc(100% - 60ch - var(--gutter)));
+  /* Same left edge as the heading and lede; a comfortable reading width */
+  margin: var(--space-32) 0 0;
+  padding-inline: var(--gutter);
+  max-width: calc(60ch + 2 * var(--gutter));
   font-size: var(--fs-20);
   font-weight: 300;
   line-height: 1.5;
@@ -207,11 +208,18 @@
   .how-it-works .hiw-titles { padding-top: var(--space-32); }
 }
 
-/* ---------- Lede joins the heading inside the image ---------- */
+/* ---------- Larger labels from the nav breakpoint ---------- */
 
 @media (min-width: 1081px) {
   .how-it-works { padding-block: 0 var(--space-120); }
 
+  .how-it-works .hiw-callout-title { font-size: var(--fs-18); }
+  .how-it-works .hiw-callout-text { font-size: var(--fs-15); }
+}
+
+/* ---------- Lede joins the heading inside the image ---------- */
+
+@media (min-width: 1200px) {
   .how-it-works .hiw-stage { grid-template-areas: "canvas"; }
 
   .how-it-works .hiw-heading {
@@ -225,7 +233,4 @@
   }
   .how-it-works .hiw-titles { padding: 0; }
   .how-it-works .hiw-lede { padding: 0; margin-top: var(--space-24); }
-
-  .how-it-works .hiw-callout-title { font-size: var(--fs-18); }
-  .how-it-works .hiw-callout-text { font-size: var(--fs-15); }
 }

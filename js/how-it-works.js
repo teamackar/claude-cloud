@@ -16,7 +16,7 @@ var CONFIG = {
       passive: { x: 81.0, y: 67.7, w: 12.4, top: 63.0, bottom: 72.5 }
     },
     labels: {
-      active: { x: 30.5, y: 53, w: 26, align: 'end' },  // above and left
+      active: { x: 30.5, y: 51.5, w: 26, align: 'end' }, // above and left; y keeps the description off the band at wide widths
       passive: { x: 88, y: 58.5, w: 26, align: 'end' }  // above; not right, the window is there. x and y keep the description clear of the ceiling band
     },
     spacing: { t: 0.5 },

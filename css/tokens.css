@@ -20,6 +20,7 @@
      section     (min-width: 821px)  home sections switch from stacked to wide
                  layout (wide diagrams, side-by-side columns). The complement of
                  compact's width rule.
+     hiw-lede    (min-width: 1200px)  How It Works lede moves inside the image.
    ========================================================================== */
 
 :root {
