@@ -70,16 +70,47 @@
   color: var(--ui-text);
 }
 
-.how-it-works .hiw-lede {
+/* Text block under the illustration (below 1200px; inside it from 1200px).
+   Phones get the summary and note; the lede takes over from 768px. */
+.how-it-works .hiw-text {
   grid-area: lede;
-  margin: 0;
-  /* Below 1200px the lede sits under the illustration, set apart by the
-     space above it */
   padding: var(--space-48) var(--gutter) 0;
   max-width: calc(62ch + 2 * var(--gutter));
+}
+
+.how-it-works .hiw-lede {
+  display: none;
+  margin: 0;
   font-size: var(--fs-17);
   line-height: 1.6;
   color: var(--ui-text-secondary);
+}
+
+.how-it-works .hiw-summary {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-16);
+  font-size: var(--fs-17);
+  line-height: 1.45;
+  color: var(--ui-text);
+  text-wrap: pretty; /* no one-word last lines */
+}
+
+.how-it-works .hiw-note {
+  margin: var(--space-32) 0 0;
+  text-wrap: pretty;
+  font-size: var(--fs-17);
+  line-height: 1.6;
+  color: var(--ui-text-secondary);
+}
+.how-it-works .hiw-note-lead { font-weight: 400; }
+
+@media (min-width: 768px) {
+  .how-it-works .hiw-lede { display: block; }
+  .how-it-works .hiw-summary,
+  .how-it-works .hiw-note { display: none; }
 }
 
 /* ---------- Callouts: plain list by default ---------- */
@@ -234,7 +265,7 @@
     max-width: calc(62ch + 2 * var(--gutter));
   }
   .how-it-works .hiw-titles { padding: 0; }
-  .how-it-works .hiw-lede { padding: 0; margin-top: var(--space-24); }
+  .how-it-works .hiw-text { padding: 0; margin-top: var(--space-24); }
 
   /* Nothing follows the illustration here, so no band below it either */
   .how-it-works { padding-bottom: 0; }

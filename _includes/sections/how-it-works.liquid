@@ -58,7 +58,20 @@
             <p class="hiw-eyebrow" data-editable="hiw-eyebrow">{{ copy.eyebrow }}</p>
             <h2 class="hiw-h" id="hiw-heading" data-editable="hiw-heading">{{ copy.heading }}</h2>
           </div>
-          <p class="hiw-lede" data-editable="hiw-lede">{{ copy.lede }}</p>
+          <div class="hiw-text">
+            <p class="hiw-lede" data-editable="hiw-lede">{{ copy.lede }}</p>
+            {%- comment -%} Below 768px the summary and note replace the lede: the
+            callouts already say which speaker does what. {%- endcomment %}
+            <ul class="hiw-summary" role="list">
+              {%- for line in copy.summary %}
+              <li data-editable="hiw-summary-{{ forloop.index }}">{{ line }}</li>
+              {%- endfor %}
+            </ul>
+            <p class="hiw-note">
+              <span class="hiw-note-lead" data-editable="hiw-note-lead">{{ copy.note.lead }}</span>
+              <span data-editable="hiw-note-text">{{ copy.note.text }}</span>
+            </p>
+          </div>
         </header>
 
       </div>
