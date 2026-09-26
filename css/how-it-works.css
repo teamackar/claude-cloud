@@ -208,6 +208,13 @@
    Wide art keeps --ink-soft; its labels sit clear of the band. */
 @media (max-width: 767px) {
   .how-it-works.is-overlaid .hiw-callout-text { color: var(--ui-text); }
+
+  /* Smaller callout text over the phone illustration */
+  .how-it-works.is-overlaid .hiw-callout-title { font-size: var(--fs-15); }
+  .how-it-works.is-overlaid .hiw-callout-text,
+  .how-it-works.is-overlaid .hiw-figure-line--alt,
+  .how-it-works.is-overlaid [data-callout^="cutout"] .hiw-figure-line { font-size: var(--fs-12); }
+  .how-it-works.is-overlaid .hiw-figure-line { font-size: var(--fs-14); }
 }
 
 /* ---------- Wide art ---------- */

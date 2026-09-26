@@ -42,8 +42,8 @@ var CONFIG = {
       passive: { x: 73.7, y: 69.7, w: 18.3, top: 66.0, bottom: 73.5 }
     },
     labels: {
-      active: { side: 'below', x: 3, y: 56, w: 40, align: 'start' },
-      passive: { side: 'above', x: 95, y: 57, w: 48, align: 'end' }
+      active: { side: 'below', x: 3, y: 62, w: 40, align: 'start' },
+      passive: { side: 'above', x: 95, y: 52, w: 48, align: 'end' }
     },
     cutouts: {
       active: { side: 'above', offset: 1.0, labelGap: 0.5 },
