@@ -1,14 +1,16 @@
 // Eleventy build. Liquid templates (the language Shopify uses) so the
 // partials port across in phase two. Output is plain static HTML in _site/.
 //
-// Only src/ is read as templates, and only css/, js/ and assets/ are copied,
-// so palette.html, /art, /design and the .dc.html prototypes never reach
-// the output.
+// Only src/ is read as templates, and only css/, js/ and asset files are
+// copied, so palette.html, /art, /design (the .dc.html prototypes and their
+// runtime) and assets/manifest.json never reach the output.
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("js");
-  eleventyConfig.addPassthroughCopy("assets");
+  // Asset files only: assets/manifest.json is an internal planning file and
+  // does not ship.
+  eleventyConfig.addPassthroughCopy("assets/**/*.{webp,jpg,jpeg,png,svg,woff2,txt}");
 
   return {
     dir: {

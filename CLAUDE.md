@@ -72,9 +72,11 @@ in _layouts/, data in _data/. Output goes to _site/ (not committed).
 - `npm install` once, then `npm run dev` for the dev server with live
   reload at http://localhost:8080
 - `npm run build` writes the static site to _site/
+- `npm run images` turns /art masters into /assets outputs at the ASSETS.md
+  widths. Skips existing files unless `-- --force`. See ASSETS.md.
 - Partials use `{% render %}` with explicit parameters, as Shopify does.
-- Only src/ is templated and only css/, js/, assets/ are copied, so
-  palette.html, /art, /design and the .dc.html files never ship.
+- Only src/ is templated and only css/, js/ and asset files are copied, so
+  palette.html, /art, /design and assets/manifest.json never ship.
 
 ## Performance budget
 

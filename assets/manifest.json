@@ -1,0 +1,67 @@
+{
+  "_note": "Every asset each section expects. status: missing | placeholder | final. Dimensions in px (width x height). Rasters are generated from /art by `npm run images` at the widths in ASSETS.md; SVGs are copied. 'ratio' on a missing asset is the shape the layout will reserve for its labelled placeholder; confirm it with the illustrator.",
+  "sections": {
+    "hero": [
+      {
+        "name": "hero-wide",
+        "status": "final",
+        "shape": "wide",
+        "source": { "file": "art/hero-wide.png", "dimensions": "3344x1882" },
+        "outputs": [
+          { "file": "assets/hero-wide-1600.webp", "dimensions": "1600x901" },
+          { "file": "assets/hero-wide-2560.webp", "dimensions": "2560x1441" },
+          { "file": "assets/hero-wide.jpg", "dimensions": "1920x1080" }
+        ]
+      },
+      {
+        "name": "hero-portrait",
+        "status": "final",
+        "shape": "portrait",
+        "source": { "file": "art/hero-portrait.png", "dimensions": "2048x3072" },
+        "outputs": [
+          { "file": "assets/hero-portrait-900.webp", "dimensions": "900x1350" },
+          { "file": "assets/hero-portrait-1440.webp", "dimensions": "1440x2160" },
+          { "file": "assets/hero-portrait.jpg", "dimensions": "1000x1500" }
+        ]
+      }
+    ],
+    "how-it-works": [
+      {
+        "name": "howitworks-ceiling-diagram-wide",
+        "status": "missing",
+        "shape": "wide",
+        "format": "svg",
+        "ratio": "16:9",
+        "notes": "Layered SVG, meaningful layer ids (active unit, passive unit, cable, adaptor, ceiling socket). Must show: one system, only the active unit has the amplifier and Bluetooth, only the active unit is powered, ceiling socket not supplied."
+      },
+      {
+        "name": "howitworks-ceiling-diagram-portrait",
+        "status": "missing",
+        "shape": "portrait",
+        "format": "svg",
+        "ratio": "4:5",
+        "notes": "Own composition for mobile, not a crop of the wide diagram."
+      }
+    ],
+    "find-your-animal": [
+      { "name": "animal-cat-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
+      { "name": "animal-cheetah-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
+      { "name": "animal-giraffe-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
+      { "name": "animal-fourth-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920", "notes": "Fourth animal not decided yet. Rename to animal-<name>-card when it is." }
+    ],
+    "listening-moment": [
+      { "name": "listening-moment-wide", "status": "missing", "shape": "wide", "format": "png", "ratio": "16:9", "min_source": "2560x1440" },
+      { "name": "listening-moment-portrait", "status": "missing", "shape": "portrait", "format": "png", "ratio": "2:3", "min_source": "1440x2160", "notes": "Own composition for mobile, not a crop of the wide one." }
+    ],
+    "inside-the-speaker": [
+      {
+        "name": "product-exploded",
+        "status": "missing",
+        "shape": "wide",
+        "format": "svg",
+        "ratio": "tbd",
+        "notes": "Layered SVG, meaningful layer ids per component, so it can be animated apart."
+      }
+    ]
+  }
+}
