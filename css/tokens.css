@@ -69,6 +69,10 @@
   --space-120: 120px;
 
   --gutter: clamp(20px, 3.9vw, 56px);
+  /* Spacing below the header on inner pages. A deliberate rounded value, NOT
+     the header's height: that varies by breakpoint (measured 52-104px:
+     88 desktop, 104 at the 1080 hamburger breakpoint, 80 landscape phone,
+     72 portrait phone). Do not use this to position anything against the header. */
   --header-h: 90px;
 
   /* ---------- 3. Semantic (light surface, the default) ---------- */
