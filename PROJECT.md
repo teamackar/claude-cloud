@@ -106,7 +106,8 @@ Policy pages.
 - How It Works states plainly that a ceiling mains socket is needed and is
   not supplied. Burying this loses sales later, not earlier.
 - Find Your Animal is a passive read, not a quiz. All four cards link to
-  /product.
+  /product. The four animals: the Cat, the Weaver Bird, the Elephant and
+  the Zebra.
 - The Listening Moment is purely emotional, no call to action. Do not add
   a button.
 - Terracotta means action and nothing else.

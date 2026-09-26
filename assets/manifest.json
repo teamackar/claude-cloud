@@ -8,9 +8,9 @@
         "shape": "wide",
         "source": { "file": "art/hero-wide.png", "dimensions": "3344x1882" },
         "outputs": [
-          { "file": "assets/hero-wide-1600.webp", "dimensions": "1600x901" },
+          { "file": "assets/hero-wide-1600.webp", "dimensions": "1600x900" },
           { "file": "assets/hero-wide-2560.webp", "dimensions": "2560x1441" },
-          { "file": "assets/hero-wide.jpg", "dimensions": "1920x1080" }
+          { "file": "assets/hero-wide.jpg", "dimensions": "1920x1081" }
         ]
       },
       {
@@ -45,9 +45,9 @@
     ],
     "find-your-animal": [
       { "name": "animal-cat-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
-      { "name": "animal-cheetah-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
-      { "name": "animal-giraffe-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
-      { "name": "animal-fourth-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920", "notes": "Fourth animal not decided yet. Rename to animal-<name>-card when it is." }
+      { "name": "animal-weaver-bird-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
+      { "name": "animal-elephant-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" },
+      { "name": "animal-zebra-card", "status": "missing", "shape": "portrait", "format": "png", "ratio": "3:4", "min_source": "1440x1920" }
     ],
     "listening-moment": [
       { "name": "listening-moment-wide", "status": "missing", "shape": "wide", "format": "png", "ratio": "16:9", "min_source": "2560x1440" },

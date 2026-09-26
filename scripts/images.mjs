@@ -13,7 +13,7 @@
 // Existing outputs are skipped unless --force, so approved assets are never
 // re-encoded by accident. Sources are never upscaled.
 
-import { readdir, mkdir, copyFile, stat } from "node:fs/promises";
+import { readdir, mkdir, copyFile, stat, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -40,6 +40,17 @@ const WARN_BYTES = 250 * 1024;
 
 const kb = (n) => `${Math.round(n / 1024)}KB`;
 
+// JPG has no transparency, so transparent sources are flattened onto the
+// brand ivory. The value is read from --cream in css/tokens.css at run time
+// rather than copied here, so it cannot drift from the token.
+async function ivoryFromTokens() {
+  const css = await readFile(path.join(ROOT, "css", "tokens.css"), "utf8");
+  const m = css.match(/--cream:\s*(#[0-9a-fA-F]{6})\b/);
+  if (!m) throw new Error("Could not read --cream from css/tokens.css");
+  return m[1];
+}
+let FLATTEN_BG;
+
 async function processRaster(file) {
   const src = path.join(ART, file);
   const name = path.parse(file).name;
@@ -63,7 +74,7 @@ async function processRaster(file) {
       console.log(`  WARN   ${job.out}: source is only ${meta.width}px wide, not upscaling; supply a larger master`);
     }
     let img = sharp(src).resize({ width: job.width, withoutEnlargement: true });
-    img = job.fmt === "webp" ? img.webp(WEBP) : img.flatten({ background: { r: 255, g: 255, b: 255 } }).jpeg(JPG);
+    img = job.fmt === "webp" ? img.webp(WEBP) : img.flatten({ background: FLATTEN_BG }).jpeg(JPG);
     const info = await img.toFile(dest);
     const flag = info.size > WARN_BYTES ? "  WARN over 250KB, check the budget" : "";
     console.log(`  write  ${job.out}  ${info.width}x${info.height}  ${kb(info.size)}${flag}`);
@@ -71,6 +82,7 @@ async function processRaster(file) {
 }
 
 async function main() {
+  FLATTEN_BG = await ivoryFromTokens();
   await mkdir(OUT, { recursive: true });
   const files = (await readdir(ART)).filter(
     (f) => !f.startsWith(".") && (filters.length === 0 || filters.some((q) => f.includes(q)))
