@@ -48,8 +48,7 @@
       "id": "social",
       "heading": "Social",
       "links": [
-        { "label": "Instagram", "url": "#", "editable": "footer-social-instagram", "placeholder": true },
-        { "label": "YouTube", "url": "#", "editable": "footer-social-youtube", "placeholder": true }
+        { "label": "Instagram", "url": "#", "editable": "footer-social-instagram", "placeholder": true }
       ]
     }
   ],
@@ -57,7 +56,7 @@
   "policies": [
     { "label": "Privacy", "url": "/privacy/", "editable": "footer-policy-privacy" },
     { "label": "Terms", "url": "/terms/", "editable": "footer-policy-terms" },
-    { "label": "Refunds", "url": "/refund/", "editable": "footer-policy-refund" },
+    { "label": "Refund Policy", "url": "/refund/", "editable": "footer-policy-refund" },
     { "label": "Shipping", "url": "/shipping/", "editable": "footer-policy-shipping" }
   ]
 }

@@ -60,6 +60,7 @@ Multi-page, because the range will grow.
 | `/story`        | Founder, the name, manufacturing |
 | `/installation` | Video, steps, cutout and spacing. Also the QR destination from inside the product box |
 | `/warranty`     | Serial number registration |
+| `/trade`        | Dealer enquiries. Footer-only page, not a nav item. |
 
 Policy pages: privacy, terms, refund, shipping.
 
