@@ -1,0 +1,15 @@
+{%- comment -%}
+  Mobile menu overlay. Rendered with: nav, current_url. Same items as the
+  desktop nav, from _data/nav.json. Opened and closed by js/main.js.
+{%- endcomment -%}
+<div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile">
+      {%- for item in nav %}
+      <a href="{{ item.url }}"{% if item.url == current_url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="#">Search</a>
+      <a href="#">Cart (0)</a>
+    </div>
+  </div>

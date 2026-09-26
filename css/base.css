@@ -33,11 +33,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus-ring); ou
 
 img { display: block; max-width: 100%; }
 
-/* ---------- Header ---------- */
+/* ---------- Header ----------
+   Default: in the page flow on a solid surface (--ui-bg is --sand on light).
+   Pages with a hero (body.has-hero) float it over the image instead. */
 
 .site-header {
-  position: absolute;
-  inset: 0 0 auto 0;
+  position: relative;
   z-index: 20;
   display: flex;
   align-items: center;
@@ -45,7 +46,17 @@ img { display: block; max-width: 100%; }
   gap: var(--space-24);
   padding: 30px var(--gutter);
   padding-top: max(30px, env(safe-area-inset-top));
+  background: var(--ui-bg);
 }
+
+.has-hero .site-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  background: none;
+}
+
+/* Inner pages: breathing room between the header and the first section */
+body:not(.has-hero) main { padding-top: var(--header-h); }
 
 .logo { font-size: 28px; font-weight: 400; line-height: 1; }
 
@@ -121,7 +132,7 @@ img { display: block; max-width: 100%; }
 .mobile-menu-footer a { padding: 10px 0; }
 
 /* When the menu is open, keep the header above the overlay */
-body.menu-open .site-header { position: fixed; }
+body.menu-open .site-header { position: fixed; inset: 0 0 auto 0; background: none; }
 
 /* ---------- Buttons and links ---------- */
 

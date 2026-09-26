@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ title | default: site.name }}</title>
+  {%- if description %}
+  <meta name="description" content="{{ description }}">
+  {%- endif %}
+  <!-- theme-color: pages set theme_color in front matter. The default mirrors
+       --sand (site.json); home mirrors --ceiling. Meta tags cannot read CSS
+       variables; keep in sync with css/tokens.css. -->
+  <meta name="theme-color" content="{{ theme_color | default: site.theme_color }}">
+
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/jost-latin-var.woff2" crossorigin>
+  {%- if head_extra %}
+{{ head_extra }}
+  {%- endif %}
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  {%- for sheet in page_css %}
+  <link rel="stylesheet" href="/css/{{ sheet }}.css">
+  {%- endfor %}
+</head>
+<body{% if has_hero %} class="has-hero"{% endif %}>
+
+  {% render "header.liquid", nav: nav, current_url: page.url %}
+
+  {% render "mobile-menu.liquid", nav: nav, current_url: page.url %}
+
+  <main>
+{{ content }}
+  </main>
+
+  {% render "footer.liquid", site: site, nav: nav %}
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

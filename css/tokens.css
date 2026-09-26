@@ -11,7 +11,7 @@
    listed here and must be kept in sync by hand):
 
      compact     (max-width: 820px), (orientation: portrait) and (max-width: 1100px)
-                 Hero art direction + compact header. Also used in index.html
+                 Hero art direction + compact header. Also used in src/index.liquid
                  <source media> and <link rel="preload" media>.
      nav         (max-width: 1080px)  nav collapses to the hamburger.
                  Mirrored in js/main.js as (min-width: 1081px).
@@ -25,11 +25,12 @@
   --ink-soft: #3E332A;
   --muted: #5F5E4E;          /* brand Muted Olive. Captions and labels only, never running copy */
   --cream: #EDE2D7;          /* brand Ivory */
-  --sand: #E8D8C3;           /* brand Cream */
+  --sand: #E8D8C3;           /* brand Cream. Mirrored as the default theme-color in
+                                _data/site.json; keep in sync. */
   --accent: #AC3629;         /* brand Deep Terracotta. Action only */
   --accent-hover: #8E2C22;
   --ceiling: #DDB898;        /* NOT in the brand palette. Pending client approval.
-                                Mirrored in index.html <meta name="theme-color">; keep in sync. */
+                                Mirrored as theme_color in src/index.liquid front matter; keep in sync. */
   --forest: #212D25;         /* dark sections, footer */
   --dark-alt: #333125;
   --border: #C5A37B;

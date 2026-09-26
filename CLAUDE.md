@@ -51,10 +51,10 @@ and the reasoning in "Technical".
 ## Do not
 
 - Never hardcode a hex or rgba value outside tokens.css.
-  Sole exception: `<meta name="theme-color">`, which cannot read CSS
-  variables. It mirrors --ceiling and carries a keep-in-sync comment.
+  Sole exception: theme-color, which cannot read CSS variables. The default
+  in _data/site.json mirrors --sand; a page overrides it with theme_color in
+  front matter (home mirrors --ceiling). Both carry keep-in-sync comments.
 - Never write inline !important styles from JavaScript.
-- Use MutationObserver for anything depending on deferred rendering.
 - Never link a PNG from /art directly. Each is about 5x the page budget.
 - Never deploy /design. It pulls React, ReactDOM and Babel, about 3MB.
 - Never write copy implying single speakers are sold.
@@ -63,6 +63,18 @@ and the reasoning in "Technical".
 
 - Use MutationObserver for anything depending on deferred rendering.
 - Mobile first. Verify at 375px before anything else.
+
+## Build
+
+Eleventy 3 with Liquid. Templates in src/, partials in _includes/, layouts
+in _layouts/, data in _data/. Output goes to _site/ (not committed).
+
+- `npm install` once, then `npm run dev` for the dev server with live
+  reload at http://localhost:8080
+- `npm run build` writes the static site to _site/
+- Partials use `{% render %}` with explicit parameters, as Shopify does.
+- Only src/ is templated and only css/, js/, assets/ are copied, so
+  palette.html, /art, /design and the .dc.html files never ship.
 
 ## Performance budget
 

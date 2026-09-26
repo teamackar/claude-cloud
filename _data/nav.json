@@ -1,0 +1,7 @@
+[
+  { "label": "Product", "url": "/product/" },
+  { "label": "Upcoming", "url": "/upcoming/" },
+  { "label": "Our Story", "url": "/story/" },
+  { "label": "Installation", "url": "/installation/" },
+  { "label": "Register Warranty", "url": "/warranty/" }
+]

@@ -1,0 +1,21 @@
+{%- comment -%}
+  Site header. Rendered with: nav (array of {label, url}), current_url.
+  Uses {% render %} with explicit parameters, as Shopify does.
+{%- endcomment -%}
+<header class="site-header">
+    <a href="/" class="logo">giraffe</a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      {%- for item in nav %}
+      <a href="{{ item.url }}"{% if item.url == current_url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+
+    <div class="header-actions">
+      <a href="#" class="action-search">Search</a>
+      <a href="#" class="action-cart">Cart <span class="cart-count">(0)</span></a>
+      <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>

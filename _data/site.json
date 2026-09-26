@@ -1,0 +1,19 @@
+{
+  "name": "Giraffe",
+  "brand": "Sounds of Giraffe",
+  "language": "en",
+  "_theme_color_note": "theme_color mirrors --sand in css/tokens.css. Meta tags cannot read CSS variables; keep in sync.",
+  "theme_color": "#E8D8C3",
+  "contact": {
+    "email": null,
+    "phone": null,
+    "whatsapp": null
+  },
+  "company": {
+    "legal_name": "Giraffe Stereo Systems LLP",
+    "made_in": "India",
+    "gstin": null,
+    "llpin": null,
+    "registered_address": null
+  }
+}
