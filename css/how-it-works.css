@@ -1,207 +1,230 @@
 /* How It Works — self-contained section. Root: .how-it-works.
    Ivory surface (data-surface="ivory"); reads the semantic layer only.
-   Mobile first: portrait diagram with the parts listed below it. From the
-   "section" breakpoint (min-width: 821px, see tokens.css) the wide diagram
-   takes over and the three labels sit either side of it, level with their
-   markers. */
+   No scrim, no gradient: text sits directly on the clear ceiling area of the
+   illustration.
+
+   Two states:
+   - Plain (default, no script, or image failed): image, then the callouts
+     as an ordinary list.
+   - Overlaid (.is-overlaid, set by js/how-it-works.js once the image has
+     loaded): the canvas locks to the image ratio and callouts are placed
+     over it at positions from the script's CONFIG.
+
+   Breakpoints: portrait art below 768px (matches the <source media>), wide
+   art from 768px. From 1081px (tokens.css "nav") the lede joins the heading
+   inside the image; below that the image is too short for it. */
 
 .how-it-works {
-  padding: var(--space-72) var(--gutter);
+  padding-block: var(--space-48) var(--space-72);
 }
 
-.how-it-works .hiw-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+/* ---------- Stage: image with the heading laid over its clear top ---------- */
+
+.how-it-works .hiw-stage {
   display: grid;
-  gap: var(--space-48);
+  grid-template-areas: "canvas" "lede";
+  max-width: 1440px;
+  margin-inline: auto;
 }
 
-/* ---------- Intro ---------- */
+.how-it-works .hiw-canvas {
+  grid-area: canvas;
+  position: relative;
+}
 
-.how-it-works .hiw-intro { max-width: 62ch; }
+.how-it-works .hiw-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Below 1081px the heading wrapper dissolves so its two parts can sit in
+   different places: titles over the image, lede below it. */
+.how-it-works .hiw-heading { display: contents; }
+
+.how-it-works .hiw-titles {
+  grid-area: canvas;
+  align-self: start;
+  position: relative;
+  z-index: 2;
+  padding: var(--space-24) var(--gutter) 0;
+}
 
 .how-it-works .hiw-eyebrow {
-  margin: 0 0 var(--space-16);
+  margin: 0 0 var(--space-12);
   font-size: var(--fs-12);
   letter-spacing: 0.38em;
   text-transform: uppercase;
   color: var(--ui-text-secondary);
 }
 
-.how-it-works .hiw-heading {
+.how-it-works .hiw-h {
   margin: 0;
+  max-width: 14em;
   font-size: var(--fs-heading);
   font-weight: 300;
   line-height: 1.02;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  color: var(--ui-text);
 }
 
-.how-it-works .hiw-body {
-  margin: var(--space-24) 0 0;
+.how-it-works .hiw-lede {
+  grid-area: lede;
+  margin: 0;
+  padding: var(--space-32) var(--gutter) 0;
+  max-width: calc(62ch + 2 * var(--gutter));
   font-size: var(--fs-17);
   line-height: 1.6;
   color: var(--ui-text-secondary);
 }
 
-/* ---------- Diagram and parts ---------- */
+/* ---------- Callouts: plain list by default ---------- */
 
-.how-it-works .hiw-figure { margin: 0; }
-
-.how-it-works .hiw-art {
-  position: relative;
-  margin-inline: auto;
-}
-.how-it-works .hiw-art--portrait { max-width: 480px; }
-.how-it-works .hiw-art--wide { display: none; }
-
-.how-it-works .hiw-art-media { display: block; width: 100%; height: auto; }
-
-/* Numbered markers sit on the part they name; the artwork carries no labels */
-.how-it-works .hiw-marker,
-.how-it-works .hiw-num {
-  display: inline-grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--ui-text);
-  color: var(--ui-bg);
-  font-size: var(--fs-14);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-}
-.how-it-works .hiw-marker {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 3px var(--ui-bg);
-}
-
-.how-it-works .hiw-parts {
-  margin: var(--space-32) 0 0;
+.how-it-works .hiw-callouts {
+  margin: var(--space-24) var(--gutter) 0;
   padding: 0;
   list-style: none;
   display: grid;
-  gap: var(--space-24);
-}
-
-.how-it-works .hiw-part {
-  display: grid;
-  grid-template-columns: 28px 1fr;
   gap: var(--space-16);
-  align-items: start;
 }
 
-.how-it-works .hiw-part-copy { margin: 2px 0 0; font-size: var(--fs-15); line-height: 1.5; }
-.how-it-works .hiw-part-title { display: block; font-size: var(--fs-17); font-weight: 400; color: var(--ui-text); }
-.how-it-works .hiw-part-text { display: block; color: var(--ui-text-secondary); }
+.how-it-works .hiw-callout-title,
+.how-it-works .hiw-callout-text,
+.how-it-works .hiw-context,
+.how-it-works .hiw-figure-line { display: block; }
 
-/* ---------- Facts and note ---------- */
+.how-it-works .hiw-callout-title { font-size: var(--fs-17); font-weight: 400; line-height: 1.3; color: var(--ui-text); }
+.how-it-works .hiw-callout-text { font-size: var(--fs-14); line-height: 1.45; color: var(--ui-text-secondary); }
+.how-it-works .hiw-context { font-size: var(--fs-14); color: var(--ui-text-secondary); }
+.how-it-works .hiw-figure-line { font-size: var(--fs-15); line-height: 1.35; color: var(--ui-text); font-variant-numeric: tabular-nums; }
+.how-it-works .hiw-figure-line--alt { font-size: var(--fs-14); color: var(--ui-text-secondary); }
 
-.how-it-works .hiw-footer {
-  display: grid;
-  gap: var(--space-32);
-  padding-top: var(--space-32);
-  border-top: 1px solid var(--ui-border);
+.how-it-works .hiw-overlay { display: none; }
+
+/* ---------- Overlaid ---------- */
+
+.how-it-works.is-overlaid .hiw-canvas { aspect-ratio: 3 / 4; }
+
+.how-it-works.is-overlaid .hiw-img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
 }
 
-.how-it-works .hiw-facts {
+.how-it-works.is-overlaid .hiw-overlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.how-it-works .hiw-overlay .hiw-stroke {
+  fill: none;
+  stroke: var(--ui-text);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.how-it-works .hiw-overlay .hiw-fill { fill: var(--ui-text); stroke: none; }
+
+.how-it-works.is-overlaid .hiw-callouts {
+  position: absolute;
+  inset: 0;
   margin: 0;
-  display: grid;
-  gap: var(--space-32);
+  display: block;
+  pointer-events: none;
+}
+.how-it-works.is-overlaid .hiw-callout {
+  position: absolute;
+  pointer-events: auto;
 }
 
-/* Read as data: caption, figure, then the other unit */
-.how-it-works .hiw-fact {
-  display: grid;
-  gap: var(--space-8);
+/* Labels: bottom edge at --y, aligned to --x from the start or the end */
+.how-it-works.is-overlaid .hiw-callout--label {
+  bottom: calc(100% - var(--y) * 1%);
+  width: max-content;
+  max-width: calc(var(--w) * 1%);
+}
+.how-it-works.is-overlaid .hiw-callout--label[data-align="start"] { left: calc(var(--x) * 1%); text-align: left; }
+.how-it-works.is-overlaid .hiw-callout--label[data-align="end"] { right: calc(100% - var(--x) * 1%); text-align: right; }
+
+/* Figures: centred on --x; the spacing figure also centred on --y */
+.how-it-works.is-overlaid .hiw-callout--figure {
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+.how-it-works.is-overlaid [data-callout="spacing"] { transform: translate(-50%, -50%); }
+.how-it-works.is-overlaid [data-callout^="cutout"] .hiw-figure-line { font-size: var(--fs-14); }
+
+/* Context captions are for the plain list; over the image the drawing
+   supplies the context, so they stay for screen readers only. */
+.how-it-works.is-overlaid .hiw-context {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.how-it-works .hiw-fact-caption { font-size: var(--fs-15); color: var(--ui-text-secondary); }
+/* Image failed: drop the image and stack the heading above the plain list */
+.how-it-works.is-image-failed .hiw-stage { grid-template-areas: "titles" "canvas" "lede"; }
+.how-it-works.is-image-failed .hiw-titles,
+.how-it-works.is-image-failed .hiw-heading { grid-area: titles; }
+.how-it-works.is-image-failed picture { display: none; }
 
-.how-it-works .hiw-fact-value {
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: var(--space-8);
-  font-variant-numeric: tabular-nums;
-}
-.how-it-works .hiw-fig {
-  font-size: var(--fs-figure);
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-.how-it-works .hiw-to,
-.how-it-works .hiw-unit {
-  font-size: var(--fs-20);
-  font-weight: 400;
-  color: var(--ui-text-secondary);
-}
-.how-it-works .hiw-fact-alt {
-  flex-basis: 100%;
-  font-size: var(--fs-14);
-  color: var(--ui-text-secondary);
-}
+/* ---------- The honest note ---------- */
 
 .how-it-works .hiw-note {
-  padding: var(--space-24);
-  border: 1px solid var(--ui-border-strong);
-  border-radius: 12px;
+  max-width: 1440px;
+  margin: var(--space-32) auto 0;
+  padding-inline: var(--gutter) max(var(--gutter), calc(100% - 60ch - var(--gutter)));
+  font-size: var(--fs-20);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ui-text-secondary);
 }
-.how-it-works .hiw-note p { margin: 0; font-size: var(--fs-17); line-height: 1.55; color: var(--ui-text-secondary); }
-.how-it-works .hiw-note-lead { display: block; margin-bottom: var(--space-8); font-weight: 400; color: var(--ui-text); }
+.how-it-works .hiw-note-lead { font-weight: 400; }
 
-/* ---------- Two facts side by side once there is room ---------- */
-
-@media (min-width: 480px) {
-  .how-it-works .hiw-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-32); }
+/* Portrait art: the tan ceiling band runs through the only room the labels
+   have between the heading and the grilles. --ink-soft measures 3.2-3.9:1
+   on the band, so over the portrait art the descriptions use --ink (4.6:1+).
+   Wide art keeps --ink-soft; its labels sit clear of the band. */
+@media (max-width: 767px) {
+  .how-it-works.is-overlaid .hiw-callout-text { color: var(--ui-text); }
 }
 
-/* ---------- Wide: diagram-led ----------
-   821px+ (tokens.css "section"): wide diagram, labels in a row beneath it.
-   1081px+ (tokens.css "nav"): labels move beside the diagram, level with
-   their markers. Below 1081 the side columns are too narrow and the labels
-   collide. */
+/* ---------- Wide art ---------- */
 
-@media (min-width: 821px) {
-  .how-it-works { padding-block: var(--space-120); }
-  .how-it-works .hiw-inner { gap: var(--space-72); }
-
-  .how-it-works .hiw-art--portrait { display: none; }
-  .how-it-works .hiw-art--wide { display: block; }
-
-  .how-it-works .hiw-parts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-32); }
-
-  .how-it-works .hiw-footer {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: var(--space-48);
-    align-items: start;
-  }
+@media (min-width: 768px) {
+  .how-it-works.is-overlaid .hiw-canvas { aspect-ratio: 3 / 2; }
+  .how-it-works .hiw-titles { padding-top: var(--space-32); }
 }
+
+/* ---------- Lede joins the heading inside the image ---------- */
 
 @media (min-width: 1081px) {
-  /* Side columns for labels; the diagram fills the middle. Labels are
-     positioned at their marker's height (--y, % of the diagram). */
-  .how-it-works .hiw-diagram {
-    --label-col: clamp(180px, 18vw, 240px);
+  .how-it-works { padding-block: var(--space-72) var(--space-120); }
+
+  .how-it-works .hiw-stage { grid-template-areas: "canvas"; }
+
+  .how-it-works .hiw-heading {
+    display: block;
+    grid-area: canvas;
+    align-self: start;
     position: relative;
-    padding-inline: var(--label-col);
+    z-index: 2;
+    padding: var(--space-48) var(--gutter) 0;
+    max-width: calc(62ch + 2 * var(--gutter));
   }
-  .how-it-works .hiw-parts { margin: 0; display: block; }
-  .how-it-works .hiw-part {
-    position: absolute;
-    top: calc(var(--y) * 1%);
-    width: calc(var(--label-col) - var(--space-24));
-    transform: translateY(-50%);
-  }
-  .how-it-works .hiw-part--left {
-    left: 0;
-    grid-template-columns: 1fr 28px;
-    text-align: right;
-  }
-  .how-it-works .hiw-part--left .hiw-num { order: 2; }
-  .how-it-works .hiw-part--right { right: 0; }
+  .how-it-works .hiw-titles { padding: 0; }
+  .how-it-works .hiw-lede { padding: 0; margin-top: var(--space-24); }
+
+  .how-it-works .hiw-callout-title { font-size: var(--fs-18); }
+  .how-it-works .hiw-callout-text { font-size: var(--fs-15); }
 }

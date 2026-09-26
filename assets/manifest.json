@@ -51,76 +51,56 @@
     ],
     "how-it-works": [
       {
-        "name": "howitworks-ceiling-diagram-wide",
-        "status": "missing",
+        "name": "howitworks-ceiling-wide",
+        "status": "final",
         "shape": "wide",
-        "format": "svg",
-        "ratio": "16:9",
-        "notes": "Layered SVG. No text, numbers or arrows in the artwork: labels and numbered markers are HTML laid over it at 'anchors' (% of the viewBox; copy source: _data/how_it_works.json parts[]). Centre each named part on its anchor and keep a clear, low-detail zone of about 40px radius (viewBox units) around it, because a 28px marker sits on top. Must show: one system, only the active unit has the amplifier and Bluetooth, only the active unit is powered, ceiling socket not supplied.",
-        "viewBox": "0 0 1600 900",
-        "anchors": {
-          "active-speaker": {
-            "x_pct": 30,
-            "y_pct": 56,
-            "marker": 1
-          },
-          "passive-speaker": {
-            "x_pct": 70,
-            "y_pct": 56,
-            "marker": 2
-          },
-          "adaptor": {
-            "x_pct": 17,
-            "y_pct": 24,
-            "marker": 3
-          }
+        "ratio": "3:2",
+        "used": "768px and up",
+        "source": {
+          "file": "art/howitworks-ceiling-wide.png",
+          "dimensions": "3072x2048"
         },
-        "layers": [
-          "ceiling",
-          "room",
-          "active-speaker",
-          "passive-speaker",
-          "speaker-cable",
-          "adaptor",
-          "mains-socket",
-          "adaptor-lead"
-        ]
+        "outputs": [
+          {
+            "file": "assets/howitworks-ceiling-wide-1600.webp",
+            "dimensions": "1600x1067"
+          },
+          {
+            "file": "assets/howitworks-ceiling-wide-2560.webp",
+            "dimensions": "2560x1707"
+          },
+          {
+            "file": "assets/howitworks-ceiling-wide.jpg",
+            "dimensions": "1920x1280"
+          }
+        ],
+        "notes": "Clean art: no text, arrows or figures. Overlay anchors live in CONFIG at the top of js/how-it-works.js. Clear of detail from the top down to 35%."
       },
       {
-        "name": "howitworks-ceiling-diagram-portrait",
-        "status": "missing",
+        "name": "howitworks-ceiling-portrait",
+        "status": "final",
         "shape": "portrait",
-        "format": "svg",
-        "ratio": "4:5",
-        "notes": "Layered SVG. No text, numbers or arrows in the artwork: labels and numbered markers are HTML laid over it at 'anchors' (% of the viewBox; copy source: _data/how_it_works.json parts[]). Centre each named part on its anchor and keep a clear, low-detail zone of about 40px radius (viewBox units) around it, because a 28px marker sits on top. Must show: one system, only the active unit has the amplifier and Bluetooth, only the active unit is powered, ceiling socket not supplied. Own composition for mobile, not a crop of the wide diagram.",
-        "viewBox": "0 0 1200 1500",
-        "anchors": {
-          "active-speaker": {
-            "x_pct": 27,
-            "y_pct": 54,
-            "marker": 1
-          },
-          "passive-speaker": {
-            "x_pct": 73,
-            "y_pct": 54,
-            "marker": 2
-          },
-          "adaptor": {
-            "x_pct": 18,
-            "y_pct": 22,
-            "marker": 3
-          }
+        "ratio": "3:4",
+        "used": "below 768px",
+        "source": {
+          "file": "art/howitworks-ceiling-portrait.png",
+          "dimensions": "2172x2896"
         },
-        "layers": [
-          "ceiling",
-          "room",
-          "active-speaker",
-          "passive-speaker",
-          "speaker-cable",
-          "adaptor",
-          "mains-socket",
-          "adaptor-lead"
-        ]
+        "outputs": [
+          {
+            "file": "assets/howitworks-ceiling-portrait-900.webp",
+            "dimensions": "900x1200"
+          },
+          {
+            "file": "assets/howitworks-ceiling-portrait-1440.webp",
+            "dimensions": "1440x1920"
+          },
+          {
+            "file": "assets/howitworks-ceiling-portrait.jpg",
+            "dimensions": "1000x1333"
+          }
+        ],
+        "notes": "Own composition, not a crop of the wide art. Overlay anchors in js/how-it-works.js CONFIG."
       }
     ],
     "find-your-animal": [

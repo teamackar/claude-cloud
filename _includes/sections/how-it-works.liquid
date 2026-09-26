@@ -1,77 +1,70 @@
 {%- comment -%}
   How It Works. Rendered with: copy (_data/how_it_works.json), product
-  (assets/data/product.json), manifest (assets/manifest.json).
-  Self-contained: root class .how-it-works, styles in css/how-it-works.css.
-  Labels, markers and figures are HTML laid over or around the diagram,
-  never drawn into the artwork. Marker positions (% of the diagram box) come
-  from copy.parts[].wide / .portrait and are the brief to the illustrator.
-{%- endcomment -%}
-{%- assign slots = manifest.sections["how-it-works"] -%}
-{%- assign wide = slots | where: "name", "howitworks-ceiling-diagram-wide" | first -%}
-{%- assign portrait = slots | where: "name", "howitworks-ceiling-diagram-portrait" | first -%}
-<section class="how-it-works" id="next" data-surface="ivory" aria-labelledby="hiw-heading">
-      <div class="hiw-inner">
+  (assets/data/product.json).
+  Self-contained: root .how-it-works, css/how-it-works.css, js/how-it-works.js.
 
-        <header class="hiw-intro">
-          <p class="hiw-eyebrow" data-editable="hiw-eyebrow">{{ copy.eyebrow }}</p>
-          <h2 class="hiw-heading" id="hiw-heading" data-editable="hiw-heading">{{ copy.heading }}</h2>
-          <p class="hiw-body" data-editable="hiw-body">{{ copy.body }}</p>
+  The illustration carries no text, arrows or figures. Everything is drawn
+  here: labels and figures are real HTML (.hiw-callouts), and the leader
+  lines, dots, distance arrow and cutout markers are an SVG the script
+  draws over the image. Positions live in CONFIG at the top of the script.
+
+  Degrades to a plain list: without the script, or if the image fails to
+  load, .hiw-callouts renders as an ordinary list under the image.
+{%- endcomment -%}
+<section class="how-it-works" id="next" data-surface="ivory" aria-labelledby="hiw-heading">
+      <div class="hiw-stage">
+
+        <div class="hiw-canvas">
+          <picture>
+            <source media="(min-width: 768px)" type="image/webp"
+                    srcset="/assets/howitworks-ceiling-wide-1600.webp 1600w, /assets/howitworks-ceiling-wide-2560.webp 2560w"
+                    sizes="(min-width: 1440px) 1440px, 100vw">
+            <source media="(min-width: 768px)" srcset="/assets/howitworks-ceiling-wide.jpg">
+            <source type="image/webp"
+                    srcset="/assets/howitworks-ceiling-portrait-900.webp 900w, /assets/howitworks-ceiling-portrait-1440.webp 1440w"
+                    sizes="100vw">
+            <img class="hiw-img" src="/assets/howitworks-ceiling-portrait.jpg" alt="{{ copy.image_alt }}" width="1000" height="1333" loading="lazy" decoding="async">
+          </picture>
+
+          <svg class="hiw-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+
+          <ul class="hiw-callouts" role="list">
+            <li class="hiw-callout hiw-callout--label" data-callout="active">
+              <strong class="hiw-callout-title" data-editable="hiw-active-title">{{ copy.active.title }}</strong>
+              <span class="hiw-callout-text" data-editable="hiw-active-text">{{ copy.active.text }}</span>
+            </li>
+            <li class="hiw-callout hiw-callout--label" data-callout="passive">
+              <strong class="hiw-callout-title" data-editable="hiw-passive-title">{{ copy.passive.title }}</strong>
+              <span class="hiw-callout-text" data-editable="hiw-passive-text">{{ copy.passive.text }}</span>
+            </li>
+            <li class="hiw-callout hiw-callout--figure" data-callout="spacing">
+              <span class="hiw-context" data-editable="hiw-spacing-caption">{{ copy.spacing.caption }}</span>
+              <span class="hiw-figure-line">{{ product.spacing.ft.min }} <span data-editable="hiw-spacing-to">{{ copy.spacing.to }}</span> {{ product.spacing.ft.max }} ft</span>
+              <span class="hiw-figure-line hiw-figure-line--alt">{{ product.spacing.m.min }} {{ copy.spacing.to }} {{ product.spacing.m.max }} m</span>
+            </li>
+            <li class="hiw-callout hiw-callout--figure" data-callout="cutout-active">
+              <span class="hiw-context" data-editable="hiw-cutout-context-active">{{ copy.cutout.context_active }}</span>
+              <span class="hiw-figure-line">{{ product.cutout.mm }} mm <span data-editable="hiw-cutout-label">{{ copy.cutout.label }}</span></span>
+            </li>
+            <li class="hiw-callout hiw-callout--figure" data-callout="cutout-passive">
+              <span class="hiw-context" data-editable="hiw-cutout-context-passive">{{ copy.cutout.context_passive }}</span>
+              <span class="hiw-figure-line">{{ product.cutout.mm }} mm <span data-editable="hiw-cutout-label-passive">{{ copy.cutout.label }}</span></span>
+            </li>
+          </ul>
+        </div>
+
+        <header class="hiw-heading">
+          <div class="hiw-titles">
+            <p class="hiw-eyebrow" data-editable="hiw-eyebrow">{{ copy.eyebrow }}</p>
+            <h2 class="hiw-h" id="hiw-heading" data-editable="hiw-heading">{{ copy.heading }}</h2>
+          </div>
+          <p class="hiw-lede" data-editable="hiw-lede">{{ copy.lede }}</p>
         </header>
 
-        <div class="hiw-diagram">
-          <figure class="hiw-figure">
-            <div class="hiw-art hiw-art--wide">
-              {% render "asset-slot.liquid", entry: wide, alt: copy.diagram_alt, class: "hiw-art-media" %}
-              {%- for part in copy.parts %}
-              <span class="hiw-marker" style="left: {{ part.wide.x }}%; top: {{ part.wide.y }}%" aria-hidden="true">{{ forloop.index }}</span>
-              {%- endfor %}
-            </div>
-            <div class="hiw-art hiw-art--portrait">
-              {% render "asset-slot.liquid", entry: portrait, alt: copy.diagram_alt, class: "hiw-art-media" %}
-              {%- for part in copy.parts %}
-              <span class="hiw-marker" style="left: {{ part.portrait.x }}%; top: {{ part.portrait.y }}%" aria-hidden="true">{{ forloop.index }}</span>
-              {%- endfor %}
-            </div>
-          </figure>
-
-          <ol class="hiw-parts">
-            {%- for part in copy.parts %}
-            <li class="hiw-part hiw-part--{% if part.wide.x < 50 %}left{% else %}right{% endif %}" style="--y: {{ part.wide.y }}">
-              <span class="hiw-num" aria-hidden="true">{{ forloop.index }}</span>
-              <p class="hiw-part-copy">
-                <strong class="hiw-part-title" data-editable="hiw-part-{{ part.id }}-title">{{ part.title | replace: "{adaptor}", product.power.adaptor }}</strong>
-                <span class="hiw-part-text" data-editable="hiw-part-{{ part.id }}-text">{{ part.text }}</span>
-              </p>
-            </li>
-            {%- endfor %}
-          </ol>
-        </div>
-
-        <div class="hiw-footer">
-          <dl class="hiw-facts">
-            <div class="hiw-fact">
-              <dt class="hiw-fact-caption" data-editable="hiw-fact-cutout-caption">{{ copy.facts.cutout_caption }}</dt>
-              <dd class="hiw-fact-value">
-                <span class="hiw-fig">{{ product.cutout.mm }}</span><span class="hiw-unit">mm</span>
-                <span class="hiw-fact-alt">{{ product.cutout.in }} in</span>
-              </dd>
-            </div>
-            <div class="hiw-fact">
-              <dt class="hiw-fact-caption" data-editable="hiw-fact-spacing-caption">{{ copy.facts.spacing_caption }}</dt>
-              <dd class="hiw-fact-value">
-                <span class="hiw-fig">{{ product.spacing.ft.min }}</span><span class="hiw-to" data-editable="hiw-fact-spacing-to">{{ copy.facts.spacing_word }}</span><span class="hiw-fig">{{ product.spacing.ft.max }}</span><span class="hiw-unit">ft</span>
-                <span class="hiw-fact-alt">{{ product.spacing.m.min }} {{ copy.facts.spacing_word }} {{ product.spacing.m.max }} m</span>
-              </dd>
-            </div>
-          </dl>
-
-          <aside class="hiw-note" aria-label="Power socket">
-            <p>
-              <strong class="hiw-note-lead" data-editable="hiw-note-lead">{{ copy.note.lead }}</strong>
-              <span data-editable="hiw-note-text">{{ copy.note.text }}</span>
-            </p>
-          </aside>
-        </div>
-
       </div>
+
+      <p class="hiw-note">
+        <span class="hiw-note-lead" data-editable="hiw-note-lead">{{ copy.note.lead }}</span>
+        <span data-editable="hiw-note-text">{{ copy.note.text }}</span>
+      </p>
     </section>

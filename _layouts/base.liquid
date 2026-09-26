@@ -37,5 +37,8 @@
 
   <script src="/js/main.js"></script>
   <script src="/js/forms.js"></script>
+  {%- for script in page_js %}
+  <script src="/js/{{ script }}.js"></script>
+  {%- endfor %}
 </body>
 </html>

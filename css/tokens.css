@@ -62,7 +62,6 @@
   --fs-display-short: clamp(40px, 12vw, 52px);
   --fs-display-landscape: clamp(30px, 9vh, 44px);
   --fs-heading: clamp(32px, 5.2vw, 56px);     /* section headings (h2) */
-  --fs-figure: clamp(48px, 7vw, 80px);        /* facts set as figures */
 
   --space-8: 8px;
   --space-12: 12px;
