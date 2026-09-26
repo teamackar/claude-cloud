@@ -20,9 +20,5 @@
     "label": "cutout",
     "context_active": "Active speaker",
     "context_passive": "Passive speaker"
-  },
-  "note": {
-    "lead": "The adaptor needs a mains socket.",
-    "text": "The socket is not supplied. If your ceiling does not have one, an electrician will need to add it."
   }
 }

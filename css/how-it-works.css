@@ -73,8 +73,8 @@
 .how-it-works .hiw-lede {
   grid-area: lede;
   margin: 0;
-  /* Below 1200px the lede opens a single text block with the note, set
-     apart from the illustration by the space above it */
+  /* Below 1200px the lede sits under the illustration, set apart by the
+     space above it */
   padding: var(--space-48) var(--gutter) 0;
   max-width: calc(62ch + 2 * var(--gutter));
   font-size: var(--fs-17);
@@ -188,20 +188,6 @@
 .how-it-works.is-image-failed .hiw-heading { grid-area: titles; }
 .how-it-works.is-image-failed picture { display: none; }
 
-/* ---------- The honest note ---------- */
-
-.how-it-works .hiw-note {
-  /* Same left edge as the heading and lede. Below 1200px it continues the
-     lede's text block: same size, one paragraph gap apart. */
-  margin: var(--space-16) 0 0;
-  padding-inline: var(--gutter);
-  max-width: calc(62ch + 2 * var(--gutter));
-  font-size: var(--fs-17);
-  line-height: 1.6;
-  color: var(--ui-text-secondary);
-}
-.how-it-works .hiw-note-lead { font-weight: 400; }
-
 /* Portrait art: the tan ceiling band runs through the only room the labels
    have between the heading and the grilles. --ink-soft measures 3.2-3.9:1
    on the band, so over the portrait art the descriptions use --ink (4.6:1+).
@@ -250,12 +236,6 @@
   .how-it-works .hiw-titles { padding: 0; }
   .how-it-works .hiw-lede { padding: 0; margin-top: var(--space-24); }
 
-  /* The lede now sits inside the image, so the note stands alone below it */
-  .how-it-works .hiw-note {
-    margin-top: var(--space-32);
-    max-width: calc(60ch + 2 * var(--gutter));
-    font-size: var(--fs-20);
-    font-weight: 300;
-    line-height: 1.5;
-  }
+  /* Nothing follows the illustration here, so no band below it either */
+  .how-it-works { padding-bottom: 0; }
 }
