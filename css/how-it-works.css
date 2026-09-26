@@ -15,7 +15,8 @@
    inside the image; below that the image is too short for it. */
 
 .how-it-works {
-  padding-block: var(--space-48) var(--space-72);
+  /* No top padding: the illustration starts where the hero ends */
+  padding-block: 0 var(--space-72);
 }
 
 /* ---------- Stage: image with the heading laid over its clear top ---------- */
@@ -209,7 +210,7 @@
 /* ---------- Lede joins the heading inside the image ---------- */
 
 @media (min-width: 1081px) {
-  .how-it-works { padding-block: var(--space-72) var(--space-120); }
+  .how-it-works { padding-block: 0 var(--space-120); }
 
   .how-it-works .hiw-stage { grid-template-areas: "canvas"; }
 
