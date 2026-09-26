@@ -1,14 +1,23 @@
 // How It Works overlay: leader lines, distance arrow and cutout markers drawn
 // in SVG over the illustration, with the HTML callouts placed to match.
 //
+// Mirrored arrangement, following the ceiling's S-curve:
+//   active speaker:  cutout marker above, label below
+//   passive speaker: label above, cutout marker below
+// which leaves the middle clear for the distance arrow.
+//
 // CONFIG is the single place to correct positions. All values are
 // percentages of the image box (x of its width, y of its height).
-//   grilles: centre (x, y), trim-ring width (w), trim-ring top and bottom (top, bottom)
-//   labels:  where each label's box sits. align "end" puts its right edge at x,
-//            "start" its left edge; y is the label's bottom edge; w its max width.
-//   spacing: t is where along the centre-to-centre line its label sits (0 to 1).
-//   cutout:  offset is the gap between the ring's bottom and the marker line;
-//            labelGap the gap between the line and "200 mm cutout".
+//   grilles: centre (x, y), trim-ring width (w), trim-ring top and bottom.
+//   labels:  side "above" or "below" the speaker. align "start" puts the
+//            label's left edge at x, "end" its right edge. y is the edge
+//            nearest the speaker (bottom when above, top when below). w is
+//            the label's max width.
+//   cutouts: side "above" or "below"; offset is the gap between the ring and
+//            the marker line, labelGap the gap between the line and its text.
+//   spacing: t is where its label sits along the arrow (0 to 1).
+// Positions were tuned against a contrast map of each image so text stays
+// off the ceiling band and the lower ceiling edge.
 var CONFIG = {
   wide: {
     grilles: {
@@ -16,11 +25,14 @@ var CONFIG = {
       passive: { x: 81.0, y: 67.7, w: 12.4, top: 63.0, bottom: 72.5 }
     },
     labels: {
-      active: { x: 30.5, y: 51.5, w: 26, align: 'end' }, // above and left; y keeps the description off the band at wide widths
-      passive: { x: 88, y: 58.5, w: 26, align: 'end' }  // above; not right, the window is there. x and y keep the description clear of the ceiling band
+      active: { side: 'below', x: 27, y: 73, w: 40, align: 'start' }, // wide enough for a one-line description at 768, clear of the lower ceiling edge
+      passive: { side: 'above', x: 88, y: 58.5, w: 26, align: 'end' } // not to the right: the window is there
     },
-    spacing: { t: 0.5 },
-    cutout: { offset: 1.6, labelGap: 0.9 }
+    cutouts: {
+      active: { side: 'above', offset: 0.9, labelGap: 0.5 },
+      passive: { side: 'below', offset: 1.6, labelGap: 0.9 }
+    },
+    spacing: { t: 0.5 }
   },
   portrait: {
     grilles: {
@@ -30,11 +42,14 @@ var CONFIG = {
       passive: { x: 73.7, y: 69.7, w: 18.3, top: 66.0, bottom: 73.5 }
     },
     labels: {
-      active: { x: 5, y: 40, w: 56, align: 'start' },    // above and left; wide enough for two lines at 360px
-      passive: { x: 95, y: 54, w: 48, align: 'end' }     // above and right
+      active: { side: 'below', x: 3, y: 56, w: 40, align: 'start' },
+      passive: { side: 'above', x: 95, y: 57, w: 48, align: 'end' }
     },
-    spacing: { t: 0.55 },
-    cutout: { offset: 1.4, labelGap: 0.7 }
+    cutouts: {
+      active: { side: 'above', offset: 1.0, labelGap: 0.5 },
+      passive: { side: 'below', offset: 1.4, labelGap: 0.7 }
+    },
+    spacing: { t: 0.6 }
   }
 };
 
@@ -43,8 +58,9 @@ var CONFIG = {
 var DOT_R = 2.5;
 var ARROW_LEN = 7;
 var ARROW_SPREAD = 0.45; // radians either side of the line
+var ARROW_GAP = 3;       // space between an arrow tip and the trim ring
 var TICK = 4;            // half-height of the cutout end ticks
-var LEADER_GAP = 6;      // space between a leader's top and its label
+var LEADER_GAP = 6;      // space between a leader's end and its label
 var LABEL_PAD = 6;       // space the distance line leaves around its label
 
 (function () {
@@ -80,40 +96,54 @@ var LABEL_PAD = 6;       // space the distance line leaves around its label
       parts.push('<ellipse class="hiw-fill" cx="' + f(x) + '" cy="' + f(y) + '" rx="' + f(px(DOT_R)) + '" ry="' + f(py(DOT_R)) + '"/>');
     };
 
-    // 1. Leader lines and labels
+    // Leader lines and labels: dot on the ring edge facing the label, line to the label
     ['active', 'passive'].forEach(function (id) {
       var g = cfg.grilles[id], l = cfg.labels[id], node = el(id);
       set(node, { x: l.x, y: l.y, w: l.w });
       node.setAttribute('data-align', l.align);
-      dot(g.x, g.top);
-      line(g.x, g.top, g.x, l.y + py(LEADER_GAP));
+      node.setAttribute('data-side', l.side);
+      if (l.side === 'below') {
+        dot(g.x, g.bottom);
+        line(g.x, g.bottom, g.x, l.y - py(LEADER_GAP));
+      } else {
+        dot(g.x, g.top);
+        line(g.x, g.top, g.x, l.y + py(LEADER_GAP));
+      }
     });
 
-    // 3. Distance arrow, centre to centre, broken around its label
+    // Distance arrow: aimed centre to centre, but stopping at each trim ring
     var a = cfg.grilles.active, b = cfg.grilles.passive;
-    var ax = a.x * W / 100, ay = a.y * H / 100, bx = b.x * W / 100, by = b.y * H / 100;
-    var t = cfg.spacing.t;
-    var spacing = el('spacing');
-    set(spacing, { x: f(a.x + (b.x - a.x) * t), y: f(a.y + (b.y - a.y) * t) });
+    var ring = function (g) {   // ring as an ellipse, in px
+      return { cx: g.x * W / 100, cy: (g.top + g.bottom) / 2 * H / 100, rx: g.w / 2 * W / 100, ry: (g.bottom - g.top) / 2 * H / 100 };
+    };
+    var ra = ring(a), rb = ring(b);
+    var dx = rb.cx - ra.cx, dy = rb.cy - ra.cy, len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len;
+    var exit = function (r) { return 1 / Math.sqrt(Math.pow(ux / r.rx, 2) + Math.pow(uy / r.ry, 2)); };
+    var ta = exit(ra) + ARROW_GAP, tb = exit(rb) + ARROW_GAP;
+    var ax = ra.cx + ux * ta, ay = ra.cy + uy * ta;       // start, just outside the active ring
+    var bx = rb.cx - ux * tb, by = rb.cy - uy * tb;       // end, just outside the passive ring
+
+    var t = cfg.spacing.t, spacing = el('spacing');
+    set(spacing, { x: f(px(ax + (bx - ax) * t)), y: f(py(ay + (by - ay) * t)) });
 
     var box = spacing.getBoundingClientRect(), cbox = canvas.getBoundingClientRect();
     var rx0 = box.left - cbox.left - LABEL_PAD, rx1 = box.right - cbox.left + LABEL_PAD;
     var ry0 = box.top - cbox.top - LABEL_PAD, ry1 = box.bottom - cbox.top + LABEL_PAD;
-    // Where the centre line enters and leaves the label box (Liang-Barsky)
-    var dx = bx - ax, dy = by - ay, t0 = 0, t1 = 1, clipped = true;
-    [[-dx, ax - rx0], [dx, rx1 - ax], [-dy, ay - ry0], [dy, ry1 - ay]].forEach(function (pq) {
+    // Where the arrow enters and leaves the label box (Liang-Barsky)
+    var sx = bx - ax, sy = by - ay, t0 = 0, t1 = 1, clipped = true;
+    [[-sx, ax - rx0], [sx, rx1 - ax], [-sy, ay - ry0], [sy, ry1 - ay]].forEach(function (pq) {
       var p = pq[0], q = pq[1];
       if (p === 0) { if (q < 0) clipped = false; return; }
       var r = q / p;
       if (p < 0) { if (r > t0) t0 = r; } else if (r < t1) t1 = r;
     });
     if (clipped && t0 < t1) {
-      line(a.x, a.y, px(ax + dx * t0), py(ay + dy * t0));
-      line(px(ax + dx * t1), py(ay + dy * t1), b.x, b.y);
+      line(px(ax), py(ay), px(ax + sx * t0), py(ay + sy * t0));
+      line(px(ax + sx * t1), py(ay + sy * t1), px(bx), py(by));
     } else {
-      line(a.x, a.y, b.x, b.y);
+      line(px(ax), py(ay), px(bx), py(by));
     }
-    var ang = Math.atan2(dy, dx);
+    var ang = Math.atan2(sy, sx);
     [[ax, ay, ang], [bx, by, ang + Math.PI]].forEach(function (tip) {
       var x = tip[0], y = tip[1], th = tip[2];
       var p1 = [x + ARROW_LEN * Math.cos(th - ARROW_SPREAD), y + ARROW_LEN * Math.sin(th - ARROW_SPREAD)];
@@ -122,14 +152,17 @@ var LABEL_PAD = 6;       // space the distance line leaves around its label
         f(px(p1[0])) + ',' + f(py(p1[1])) + ' ' + f(px(x)) + ',' + f(py(y)) + ' ' + f(px(p2[0])) + ',' + f(py(p2[1])) + '"/>');
     });
 
-    // 4. Cutout markers under each grille, spanning the trim ring
+    // Cutout markers: a line spanning the trim ring, above or below it
     ['active', 'passive'].forEach(function (id) {
-      var g = cfg.grilles[id];
-      var y = g.bottom + cfg.cutout.offset, x0 = g.x - g.w / 2, x1 = g.x + g.w / 2;
+      var g = cfg.grilles[id], c = cfg.cutouts[id], node = el('cutout-' + id);
+      var above = c.side === 'above';
+      var y = above ? g.top - c.offset : g.bottom + c.offset;
+      var x0 = g.x - g.w / 2, x1 = g.x + g.w / 2;
       line(x0, y, x1, y);
       line(x0, y - py(TICK), x0, y + py(TICK));
       line(x1, y - py(TICK), x1, y + py(TICK));
-      set(el('cutout-' + id), { x: g.x, y: f(y + cfg.cutout.labelGap) });
+      node.setAttribute('data-side', c.side);
+      set(node, { x: g.x, y: f(above ? y - c.labelGap : y + c.labelGap) });
     });
 
     svg.innerHTML = parts.join('');

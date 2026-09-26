@@ -73,7 +73,9 @@
 .how-it-works .hiw-lede {
   grid-area: lede;
   margin: 0;
-  padding: var(--space-32) var(--gutter) 0;
+  /* Below 1200px the lede opens a single text block with the note, set
+     apart from the illustration by the space above it */
+  padding: var(--space-48) var(--gutter) 0;
   max-width: calc(62ch + 2 * var(--gutter));
   font-size: var(--fs-17);
   line-height: 1.6;
@@ -142,11 +144,16 @@
   pointer-events: auto;
 }
 
-/* Labels: bottom edge at --y, aligned to --x from the start or the end */
+/* Labels: the edge nearest the speaker sits at --y (bottom edge when the
+   label is above, top edge when below), aligned to --x from the start or end */
 .how-it-works.is-overlaid .hiw-callout--label {
   bottom: calc(100% - var(--y) * 1%);
   width: max-content;
   max-width: calc(var(--w) * 1%);
+}
+.how-it-works.is-overlaid .hiw-callout--label[data-side="below"] {
+  top: calc(var(--y) * 1%);
+  bottom: auto;
 }
 .how-it-works.is-overlaid .hiw-callout--label[data-align="start"] { left: calc(var(--x) * 1%); text-align: left; }
 .how-it-works.is-overlaid .hiw-callout--label[data-align="end"] { right: calc(100% - var(--x) * 1%); text-align: right; }
@@ -160,6 +167,8 @@
   white-space: nowrap;
 }
 .how-it-works.is-overlaid [data-callout="spacing"] { transform: translate(-50%, -50%); }
+/* A cutout marker above its speaker: its text sits above the line */
+.how-it-works.is-overlaid .hiw-callout--figure[data-side="above"] { transform: translate(-50%, -100%); }
 .how-it-works.is-overlaid [data-callout^="cutout"] .hiw-figure-line { font-size: var(--fs-14); }
 
 /* Context captions are for the plain list; over the image the drawing
@@ -182,13 +191,13 @@
 /* ---------- The honest note ---------- */
 
 .how-it-works .hiw-note {
-  /* Same left edge as the heading and lede; a comfortable reading width */
-  margin: var(--space-32) 0 0;
+  /* Same left edge as the heading and lede. Below 1200px it continues the
+     lede's text block: same size, one paragraph gap apart. */
+  margin: var(--space-16) 0 0;
   padding-inline: var(--gutter);
-  max-width: calc(60ch + 2 * var(--gutter));
-  font-size: var(--fs-20);
-  font-weight: 300;
-  line-height: 1.5;
+  max-width: calc(62ch + 2 * var(--gutter));
+  font-size: var(--fs-17);
+  line-height: 1.6;
   color: var(--ui-text-secondary);
 }
 .how-it-works .hiw-note-lead { font-weight: 400; }
@@ -233,4 +242,13 @@
   }
   .how-it-works .hiw-titles { padding: 0; }
   .how-it-works .hiw-lede { padding: 0; margin-top: var(--space-24); }
+
+  /* The lede now sits inside the image, so the note stands alone below it */
+  .how-it-works .hiw-note {
+    margin-top: var(--space-32);
+    max-width: calc(60ch + 2 * var(--gutter));
+    font-size: var(--fs-20);
+    font-weight: 300;
+    line-height: 1.5;
+  }
 }
