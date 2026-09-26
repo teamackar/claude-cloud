@@ -2,7 +2,9 @@
    The hero is approved. Its rules below were moved verbatim from the old
    style.css and still read raw palette tokens by design. The only edits:
    rgba() literals became rgb tuples, and the hero's button colour overrides
-   were removed so it follows the brand button rule in base.css. */
+   were removed so it follows the brand button rule in base.css.
+   Later approved fixes: phone eyebrow colour, header scrim, landscape-phone
+   crop, phone CTA row spacing. */
 
 /* ---------- Hero (desktop / landscape) ---------- */
 
@@ -13,6 +15,18 @@
   min-height: 520px;
   overflow: hidden;
   background: var(--sand);
+}
+
+/* Soft scrim behind the floating header: sits over the image, under the header.
+   Barely visible here; does real work on landscape phones (see below). */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(var(--cream-rgb) / .35), rgb(var(--cream-rgb) / 0));
 }
 
 .hero-media img {
@@ -99,6 +113,9 @@
     background: var(--ceiling);
   }
 
+  /* Header sits on the plain ceiling colour here; no scrim needed */
+  .hero::before { display: none; }
+
   /* Illustration pinned to the bottom at full width; plain ceiling colour fills above it */
   .hero-media {
     position: absolute;
@@ -129,13 +146,16 @@
     width: auto;
   }
 
-  .eyebrow { margin-bottom: 18px; font-size: 11px; letter-spacing: 0.38em; }
+  .eyebrow { margin-bottom: 18px; font-size: 11px; letter-spacing: 0.38em; color: var(--ink-soft); }
 
   .hero h1 { font-size: clamp(44px, 13.8vw, 88px); line-height: 0.98; }
 
   .lede { max-width: 26ch; font-size: clamp(16px, 2.4vw, 20px); }
 
-  .hero-ctas { gap: 8px 18px; margin-top: 22px; }
+  /* Button and link share one row from about 386px up. Below that they wrap,
+     and the larger row gap makes the link read as a deliberate second action. */
+  .hero-ctas { gap: var(--space-16) var(--space-12); margin-top: 22px; }
+  .hero-ctas .btn { gap: var(--space-12); padding: 0 18px; }
 
   .scroll-cue { display: none; }
 }
@@ -153,9 +173,34 @@
 @media (orientation: landscape) and (max-height: 500px) {
   .hero { min-height: 360px; }
   .hero-content { top: 76px; }
-  .eyebrow { margin-bottom: 10px; }
+  .eyebrow { margin-bottom: 10px; color: var(--ink-soft); }
   .hero h1 { font-size: clamp(30px, 9vh, 44px); }
   .lede { margin-top: 10px; font-size: 15px; }
   .hero-ctas { margin-top: 14px; }
   .scroll-cue { display: none; }
+
+  /* Wide illustration: the arched window frame runs behind the header actions */
+  .hero::before {
+    display: block;
+    height: 104px;
+    background: linear-gradient(to bottom, rgb(var(--cream-rgb) / .8) 0, rgb(var(--cream-rgb) / .65) 50%, rgb(var(--cream-rgb) / 0) 100%);
+  }
+}
+
+/* Landscape phones up to 820px get the portrait illustration. Pinned to the
+   bottom it put the chair behind the headline and the shirt behind the header
+   actions. Raise the crop so the text sits on plain wall instead. The image is
+   exactly viewport-wide here, so only the vertical position can move. */
+@media (max-width: 820px) and (orientation: landscape) and (max-height: 500px) {
+  .hero::before { display: none; }
+  .hero-media { top: 0; }
+  .hero-media::after { display: none; }
+  .hero-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 68%;
+  }
 }
