@@ -1,0 +1,14 @@
+{
+  "_note": "Product facts, all from the official manual. The single home for every figure the site shows. Internal: not shipped (asset passthrough excludes .json).",
+  "name": "Elevate Duo",
+  "models": { "active": "GRC501", "passive": "GRC502" },
+  "sold_as": "pair",
+  "price_inr": 15990,
+  "cutout": { "mm": 200, "in": 7.87, "per": "speaker" },
+  "spacing": { "ft": { "min": 6, "max": 10 }, "m": { "min": 1.8, "max": 3 }, "arrangement": "symmetrical" },
+  "drivers": { "size_in": 6, "type": "coaxial", "watts": 30, "ohms": 8 },
+  "power": { "adaptor": "12V", "adaptor_rating": "12V/2A", "powered_unit": "active", "socket_supplied": false },
+  "bluetooth": { "name": "DJ AMP", "pin": "012345" },
+  "environment": "Dry indoor only. Not for bathrooms or anywhere with moisture.",
+  "in_the_box": ["Active speaker", "Passive speaker", "Connection cable", "12V/2A adaptor", "User guide"]
+}

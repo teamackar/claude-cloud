@@ -1,0 +1,207 @@
+/* How It Works — self-contained section. Root: .how-it-works.
+   Ivory surface (data-surface="ivory"); reads the semantic layer only.
+   Mobile first: portrait diagram with the parts listed below it. From the
+   "section" breakpoint (min-width: 821px, see tokens.css) the wide diagram
+   takes over and the three labels sit either side of it, level with their
+   markers. */
+
+.how-it-works {
+  padding: var(--space-72) var(--gutter);
+}
+
+.how-it-works .hiw-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-48);
+}
+
+/* ---------- Intro ---------- */
+
+.how-it-works .hiw-intro { max-width: 62ch; }
+
+.how-it-works .hiw-eyebrow {
+  margin: 0 0 var(--space-16);
+  font-size: var(--fs-12);
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--ui-text-secondary);
+}
+
+.how-it-works .hiw-heading {
+  margin: 0;
+  font-size: var(--fs-heading);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.how-it-works .hiw-body {
+  margin: var(--space-24) 0 0;
+  font-size: var(--fs-17);
+  line-height: 1.6;
+  color: var(--ui-text-secondary);
+}
+
+/* ---------- Diagram and parts ---------- */
+
+.how-it-works .hiw-figure { margin: 0; }
+
+.how-it-works .hiw-art {
+  position: relative;
+  margin-inline: auto;
+}
+.how-it-works .hiw-art--portrait { max-width: 480px; }
+.how-it-works .hiw-art--wide { display: none; }
+
+.how-it-works .hiw-art-media { display: block; width: 100%; height: auto; }
+
+/* Numbered markers sit on the part they name; the artwork carries no labels */
+.how-it-works .hiw-marker,
+.how-it-works .hiw-num {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ui-text);
+  color: var(--ui-bg);
+  font-size: var(--fs-14);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.how-it-works .hiw-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 3px var(--ui-bg);
+}
+
+.how-it-works .hiw-parts {
+  margin: var(--space-32) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-24);
+}
+
+.how-it-works .hiw-part {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.how-it-works .hiw-part-copy { margin: 2px 0 0; font-size: var(--fs-15); line-height: 1.5; }
+.how-it-works .hiw-part-title { display: block; font-size: var(--fs-17); font-weight: 400; color: var(--ui-text); }
+.how-it-works .hiw-part-text { display: block; color: var(--ui-text-secondary); }
+
+/* ---------- Facts and note ---------- */
+
+.how-it-works .hiw-footer {
+  display: grid;
+  gap: var(--space-32);
+  padding-top: var(--space-32);
+  border-top: 1px solid var(--ui-border);
+}
+
+.how-it-works .hiw-facts {
+  margin: 0;
+  display: grid;
+  gap: var(--space-32);
+}
+
+/* Read as data: caption, figure, then the other unit */
+.how-it-works .hiw-fact {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.how-it-works .hiw-fact-caption { font-size: var(--fs-15); color: var(--ui-text-secondary); }
+
+.how-it-works .hiw-fact-value {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-8);
+  font-variant-numeric: tabular-nums;
+}
+.how-it-works .hiw-fig {
+  font-size: var(--fs-figure);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.how-it-works .hiw-to,
+.how-it-works .hiw-unit {
+  font-size: var(--fs-20);
+  font-weight: 400;
+  color: var(--ui-text-secondary);
+}
+.how-it-works .hiw-fact-alt {
+  flex-basis: 100%;
+  font-size: var(--fs-14);
+  color: var(--ui-text-secondary);
+}
+
+.how-it-works .hiw-note {
+  padding: var(--space-24);
+  border: 1px solid var(--ui-border-strong);
+  border-radius: 12px;
+}
+.how-it-works .hiw-note p { margin: 0; font-size: var(--fs-17); line-height: 1.55; color: var(--ui-text-secondary); }
+.how-it-works .hiw-note-lead { display: block; margin-bottom: var(--space-8); font-weight: 400; color: var(--ui-text); }
+
+/* ---------- Two facts side by side once there is room ---------- */
+
+@media (min-width: 480px) {
+  .how-it-works .hiw-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-32); }
+}
+
+/* ---------- Wide: diagram-led ----------
+   821px+ (tokens.css "section"): wide diagram, labels in a row beneath it.
+   1081px+ (tokens.css "nav"): labels move beside the diagram, level with
+   their markers. Below 1081 the side columns are too narrow and the labels
+   collide. */
+
+@media (min-width: 821px) {
+  .how-it-works { padding-block: var(--space-120); }
+  .how-it-works .hiw-inner { gap: var(--space-72); }
+
+  .how-it-works .hiw-art--portrait { display: none; }
+  .how-it-works .hiw-art--wide { display: block; }
+
+  .how-it-works .hiw-parts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-32); }
+
+  .how-it-works .hiw-footer {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--space-48);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1081px) {
+  /* Side columns for labels; the diagram fills the middle. Labels are
+     positioned at their marker's height (--y, % of the diagram). */
+  .how-it-works .hiw-diagram {
+    --label-col: clamp(180px, 18vw, 240px);
+    position: relative;
+    padding-inline: var(--label-col);
+  }
+  .how-it-works .hiw-parts { margin: 0; display: block; }
+  .how-it-works .hiw-part {
+    position: absolute;
+    top: calc(var(--y) * 1%);
+    width: calc(var(--label-col) - var(--space-24));
+    transform: translateY(-50%);
+  }
+  .how-it-works .hiw-part--left {
+    left: 0;
+    grid-template-columns: 1fr 28px;
+    text-align: right;
+  }
+  .how-it-works .hiw-part--left .hiw-num { order: 2; }
+  .how-it-works .hiw-part--right { right: 0; }
+}

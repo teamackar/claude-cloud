@@ -1,0 +1,39 @@
+{
+  "_note": "How It Works copy (every string is data-editable). Figures come from assets/data/product.json; {adaptor} is replaced with product.power.adaptor. Marker positions are % of the diagram box and are the contract with the illustrator (see manifest notes).",
+  "eyebrow": "How it works",
+  "heading": "One system. Two speakers. One cable.",
+  "body": "Elevate Duo is a pair. The active speaker holds the amplifier, the Bluetooth and the crossover. The passive speaker takes its signal from the active one through the cable supplied in the box. Only the active speaker needs power.",
+  "diagram_alt": "Cross-section of a ceiling showing the active speaker, the passive speaker, the cable between them and the adaptor plugged into a mains socket above the active speaker.",
+  "parts": [
+    {
+      "id": "active",
+      "title": "Active speaker",
+      "text": "The amplifier and Bluetooth are inside.",
+      "wide": { "x": 30, "y": 56 },
+      "portrait": { "x": 27, "y": 54 }
+    },
+    {
+      "id": "passive",
+      "title": "Passive speaker",
+      "text": "Connected by the supplied cable.",
+      "wide": { "x": 70, "y": 56 },
+      "portrait": { "x": 73, "y": 54 }
+    },
+    {
+      "id": "adaptor",
+      "title": "One {adaptor} adaptor",
+      "text": "Into the active speaker only.",
+      "wide": { "x": 17, "y": 24 },
+      "portrait": { "x": 18, "y": 22 }
+    }
+  ],
+  "facts": {
+    "cutout_caption": "Cutout, one per speaker",
+    "spacing_caption": "Between the two speakers",
+    "spacing_word": "to"
+  },
+  "note": {
+    "lead": "The adaptor needs a mains socket.",
+    "text": "The socket is not supplied. If your ceiling does not have one, an electrician will need to add it."
+  }
+}

@@ -169,6 +169,28 @@ body.menu-open .site-header { position: fixed; inset: 0 0 auto 0; background: no
   text-decoration-color: var(--link-underline);
 }
 
+/* ---------- Illustration placeholder ----------
+   Rendered by _includes/asset-slot.liquid while an asset in
+   assets/manifest.json is not final. Holds the manifest ratio. */
+
+.asset-placeholder {
+  position: relative;
+  display: grid;
+  place-content: end center; /* label at the bottom edge, clear of anything laid over the slot */
+  width: 100%;
+  max-width: 100%;
+  border: 1px dashed var(--ui-border-strong);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ui-text) 4%, var(--ui-bg));
+}
+.asset-placeholder-label {
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--fs-12);
+  letter-spacing: 0.08em;
+  color: var(--ui-text-secondary);
+  text-align: center;
+}
+
 /* ---------- Footer ----------
    Dark surface (data-surface="dark"): reads the semantic layer only, so
    colours and the button invert without footer-specific overrides.

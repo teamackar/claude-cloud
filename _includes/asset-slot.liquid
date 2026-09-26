@@ -1,0 +1,15 @@
+{%- comment -%}
+  One illustration slot, driven by assets/manifest.json.
+  Rendered with: entry (a manifest item), alt, class.
+  final        -> the real file from /assets
+  otherwise    -> a labelled placeholder at the manifest ratio, so layout
+                  never breaks while art is missing.
+{%- endcomment -%}
+{%- assign ratio = entry.ratio | replace: ":", " / " -%}
+{%- if entry.status == "final" -%}
+<img class="{{ class }}" src="/assets/{{ entry.name }}.{{ entry.format }}" alt="{{ alt }}" loading="lazy" decoding="async">
+{%- else -%}
+<div class="asset-placeholder {{ class }}" style="aspect-ratio: {{ ratio }}" role="img" aria-label="{{ alt }}">
+  <span class="asset-placeholder-label">{{ entry.name }} · {{ entry.ratio }} · {{ entry.status }}</span>
+</div>
+{%- endif -%}
