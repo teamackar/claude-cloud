@@ -1,6 +1,54 @@
 {%- comment -%}
-  Site footer. Rendered with: site, nav. Intentionally empty until the footer
-  block (see PROJECT.md "Footer"): technical downloads, dealer enquiries,
-  support, contact, newsletter, social, company details, policy pages.
-  Renders nothing today, so the home page is unchanged.
+  Site footer. Rendered with: site (company details), footer (_data/footer.json).
+  Dark surface: the semantic layer inverts colours, buttons become ivory
+  with a charcoal label. DOM order is the reading order at every width:
+  newsletter, company, support, trade, downloads, social, bottom bar.
+  data-placeholder marks links and values that are not final yet.
 {%- endcomment -%}
+<footer class="site-footer" data-surface="dark">
+    <div class="footer-grid">
+
+      <section class="footer-newsletter" aria-labelledby="footer-newsletter-heading">
+        <h2 class="footer-heading" id="footer-newsletter-heading" data-editable="footer-newsletter-heading">{{ footer.newsletter.heading }}</h2>
+        <p class="footer-intro" data-editable="footer-newsletter-intro">{{ footer.newsletter.intro }}</p>
+        <form class="newsletter-form" data-form="newsletter" novalidate>
+          <label class="field-label" for="newsletter-email" data-editable="footer-newsletter-label">{{ footer.newsletter.label }}</label>
+          <div class="newsletter-row">
+            <input class="field-input" id="newsletter-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <button class="btn" type="submit" data-editable="footer-newsletter-button">{{ footer.newsletter.button }}</button>
+          </div>
+          <p class="form-status" data-form-status data-stub-message="{{ footer.newsletter.stub_message }}" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <div class="footer-columns">
+        {%- for column in footer.columns %}
+        <nav class="footer-column" aria-labelledby="footer-{{ column.id }}-heading">
+          <h2 class="footer-heading" id="footer-{{ column.id }}-heading" data-editable="footer-{{ column.id }}-heading">{{ column.heading }}</h2>
+          <ul>
+            {%- for link in column.links %}
+            <li><a href="{{ link.url }}" data-editable="{{ link.editable }}"{% if link.placeholder %} data-placeholder{% endif %}>{{ link.label }}</a></li>
+            {%- endfor %}
+          </ul>
+        </nav>
+        {%- endfor %}
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-company">
+        <span data-editable="footer-legal-name">{{ site.company.legal_name }}</span>
+        <span>GSTIN {% if site.company.gstin %}{{ site.company.gstin }}{% else %}<span data-placeholder>to be supplied</span>{% endif %}</span>
+        <span>LLPIN {% if site.company.llpin %}{{ site.company.llpin }}{% else %}<span data-placeholder>to be supplied</span>{% endif %}</span>
+        <span data-editable="footer-made-in">Made in {{ site.company.made_in }}</span>
+      </p>
+      <nav class="footer-policies" aria-label="Policies">
+        <ul>
+          {%- for link in footer.policies %}
+          <li><a href="{{ link.url }}" data-editable="{{ link.editable }}">{{ link.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+    </div>
+  </footer>

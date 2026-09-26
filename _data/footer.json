@@ -1,0 +1,63 @@
+{
+  "_note": "Footer copy and links. 'placeholder: true' marks a link whose target does not exist yet or is not final. 'editable' is the data-editable name on the rendered label.",
+
+  "newsletter": {
+    "heading": "Newsletter",
+    "intro": "Hear first when the washroom and karaoke ceiling speakers arrive.",
+    "label": "Email address",
+    "button": "Subscribe",
+    "stub_message": "Sign-up opens soon. Nothing has been sent yet."
+  },
+
+  "columns": [
+    {
+      "id": "company",
+      "heading": "Company",
+      "links": [
+        { "label": "Our Story", "url": "/story/", "editable": "footer-company-story" },
+        { "label": "Installation", "url": "/installation/", "editable": "footer-company-installation" },
+        { "label": "Register Warranty", "url": "/warranty/", "editable": "footer-company-warranty" }
+      ]
+    },
+    {
+      "id": "support",
+      "heading": "Support",
+      "links": [
+        { "label": "Service requests", "url": "/support/", "editable": "footer-support-service" },
+        { "label": "Contact", "url": "/contact/", "editable": "footer-support-contact" }
+      ]
+    },
+    {
+      "id": "trade",
+      "heading": "Trade",
+      "links": [
+        { "label": "Dealer enquiries", "url": "/trade/", "editable": "footer-trade-dealers" }
+      ]
+    },
+    {
+      "id": "downloads",
+      "heading": "Downloads",
+      "links": [
+        { "label": "Specification sheet", "url": "/downloads/elevate-duo-spec-sheet.pdf", "editable": "footer-downloads-spec", "placeholder": true },
+        { "label": "Cutout template", "url": "/downloads/elevate-duo-cutout-template.pdf", "editable": "footer-downloads-cutout", "placeholder": true },
+        { "label": "User manual", "url": "/downloads/elevate-duo-user-manual.pdf", "editable": "footer-downloads-manual", "placeholder": true },
+        { "label": "CAD file", "url": "/downloads/elevate-duo-cad.zip", "editable": "footer-downloads-cad", "placeholder": true }
+      ]
+    },
+    {
+      "id": "social",
+      "heading": "Social",
+      "links": [
+        { "label": "Instagram", "url": "#", "editable": "footer-social-instagram", "placeholder": true },
+        { "label": "YouTube", "url": "#", "editable": "footer-social-youtube", "placeholder": true }
+      ]
+    }
+  ],
+
+  "policies": [
+    { "label": "Privacy", "url": "/privacy/", "editable": "footer-policy-privacy" },
+    { "label": "Terms", "url": "/terms/", "editable": "footer-policy-terms" },
+    { "label": "Refunds", "url": "/refund/", "editable": "footer-policy-refund" },
+    { "label": "Shipping", "url": "/shipping/", "editable": "footer-policy-shipping" }
+  ]
+}
