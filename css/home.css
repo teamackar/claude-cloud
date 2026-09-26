@@ -3,8 +3,9 @@
    style.css and still read raw palette tokens by design. The only edits:
    rgba() literals became rgb tuples, and the hero's button colour overrides
    were removed so it follows the brand button rule in base.css.
-   Later approved fixes: eyebrow colour, header scrim, landscape-phone crop,
-   phone CTA row spacing, landscape text-column scrim. */
+   Later approved fixes: eyebrow colour, phone CTA row spacing, and a split
+   layout on landscape phones. No scrims or washes over the illustration:
+   the client does not want them. */
 
 /* ---------- Hero (desktop / landscape) ---------- */
 
@@ -15,18 +16,6 @@
   min-height: 520px;
   overflow: hidden;
   background: var(--sand);
-}
-
-/* Soft scrim behind the floating header: sits over the image, under the header.
-   Barely visible here; does real work on landscape phones (see below). */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: var(--header-h);
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgb(var(--cream-rgb) / .35), rgb(var(--cream-rgb) / 0));
 }
 
 .hero-media img {
@@ -114,9 +103,6 @@
     background: var(--ceiling);
   }
 
-  /* Header sits on the plain ceiling colour here; no scrim needed */
-  .hero::before { display: none; }
-
   /* Illustration pinned to the bottom at full width; plain ceiling colour fills above it */
   .hero-media {
     position: absolute;
@@ -170,44 +156,21 @@
   .hero-ctas { margin-top: 16px; }
 }
 
-/* Landscape phones: keep the whole hero above the fold */
+/* Landscape phones: split layout. Text on flat sand at left (45%), the
+   illustration at right (55%). No text sits over the image, so a new crop or
+   new art cannot create a contrast collision here. */
 @media (orientation: landscape) and (max-height: 500px) {
-  .hero { min-height: 360px; }
-  .hero-content { top: 76px; }
-  .eyebrow { margin-bottom: 10px; color: var(--ink-soft); }
-  .hero h1 { font-size: clamp(30px, 9vh, 44px); }
-  .lede { margin-top: 10px; font-size: 15px; }
-  .hero-ctas { margin-top: 14px; }
-  .scroll-cue { display: none; }
+  .hero { min-height: 360px; background: var(--sand); }
 
-  /* Wide illustration: the arched window frame runs behind the header actions */
-  .hero::before {
-    display: block;
-    height: 104px;
-    background: linear-gradient(to bottom, rgb(var(--cream-rgb) / .8) 0, rgb(var(--cream-rgb) / .65) 50%, rgb(var(--cream-rgb) / 0) 100%);
-  }
+  /* Header spans the sand panel only: logo at left, Cart and menu at its
+     right edge. Full width again while the menu overlay is open. */
+  body:not(.menu-open) .site-header { right: 55%; }
 
-  /* Text-column scrim: holds full strength to just past the CTA row
-     (gutter + 400px), then fades out by gutter + 560px. Protects the text
-     against whatever the crop puts behind it at this height. */
-  .hero::after {
-    content: "";
+  .hero-media {
     position: absolute;
-    inset: 0 auto 0 0;
-    width: min(100%, calc(var(--gutter) + 560px));
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(to right, rgb(var(--cream-rgb) / .65) 0, rgb(var(--cream-rgb) / .55) calc(var(--gutter) + 400px), rgb(var(--cream-rgb) / 0) 100%);
+    inset: 0 0 0 45%;
+    display: block;
   }
-}
-
-/* Landscape phones up to 820px get the portrait illustration. Pinned to the
-   bottom it put the chair behind the headline and the shirt behind the header
-   actions. Raise the crop so the text sits on plain wall instead. The image is
-   exactly viewport-wide here, so only the vertical position can move. */
-@media (max-width: 820px) and (orientation: landscape) and (max-height: 500px) {
-  .hero::before { display: none; }
-  .hero-media { top: 0; }
   .hero-media::after { display: none; }
   .hero-media img {
     position: absolute;
@@ -215,6 +178,28 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 68%;
   }
+
+  /* Text column: below the header, vertically centred in what remains */
+  .hero-content {
+    top: 72px;
+    bottom: var(--space-16);
+    left: var(--gutter);
+    right: auto;
+    width: calc(45% - var(--gutter) - var(--space-24));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .eyebrow { margin-bottom: 10px; color: var(--ink-soft); }
+  .hero h1 { font-size: clamp(28px, 8vh, 40px); }
+  .lede { margin-top: 10px; max-width: none; font-size: 15px; }
+  .hero-ctas { margin-top: 14px; row-gap: var(--space-8); }
+  .scroll-cue { display: none; }
+}
+
+/* Landscape phones up to 820px get the portrait illustration. Keep the
+   raised crop so the room, not the floor, fills the image panel. */
+@media (max-width: 820px) and (orientation: landscape) and (max-height: 500px) {
+  .hero-media img { object-position: 50% 68%; }
 }
