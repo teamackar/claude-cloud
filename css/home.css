@@ -3,8 +3,8 @@
    style.css and still read raw palette tokens by design. The only edits:
    rgba() literals became rgb tuples, and the hero's button colour overrides
    were removed so it follows the brand button rule in base.css.
-   Later approved fixes: phone eyebrow colour, header scrim, landscape-phone
-   crop, phone CTA row spacing. */
+   Later approved fixes: eyebrow colour, header scrim, landscape-phone crop,
+   phone CTA row spacing, landscape text-column scrim. */
 
 /* ---------- Hero (desktop / landscape) ---------- */
 
@@ -52,7 +52,8 @@
   font-size: 12px;
   letter-spacing: 0.42em;
   text-transform: uppercase;
-  color: var(--muted);
+  /* --ink-soft measured 3.70:1 over the illustration at 1024x768; --ink clears 5.40:1 */
+  color: var(--ink);
 }
 
 .hero h1 {
@@ -184,6 +185,19 @@
     display: block;
     height: 104px;
     background: linear-gradient(to bottom, rgb(var(--cream-rgb) / .8) 0, rgb(var(--cream-rgb) / .65) 50%, rgb(var(--cream-rgb) / 0) 100%);
+  }
+
+  /* Text-column scrim: holds full strength to just past the CTA row
+     (gutter + 400px), then fades out by gutter + 560px. Protects the text
+     against whatever the crop puts behind it at this height. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: min(100%, calc(var(--gutter) + 560px));
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to right, rgb(var(--cream-rgb) / .65) 0, rgb(var(--cream-rgb) / .55) calc(var(--gutter) + 400px), rgb(var(--cream-rgb) / 0) 100%);
   }
 }
 
