@@ -1,13 +1,8 @@
 {
-  "_note": "How It Works copy. Every string is data-editable. Figures (cutout, spacing) come from assets/data/product.json. Overlay positions live in the CONFIG object at the top of js/how-it-works.js. lede shows from 768px; summary and note replace it below 768px.",
+  "_note": "How It Works copy. Every string is data-editable. Figures (cutout, spacing) come from assets/data/product.json. Overlay positions live in the CONFIG object at the top of js/how-it-works.js. lede and note show from 768px; below that the section ends at the illustration.",
   "eyebrow": "How it works",
   "heading": "One system. Two speakers. One cable.",
   "lede": "Elevate Duo is a pair. The active speaker holds the amplifier, the Bluetooth and the crossover. The passive speaker takes its signal from the active one through the cable supplied in the box. Only the active speaker needs power.",
-  "summary": [
-    "Sold as a pair. Both speakers come in one box.",
-    "One cable joins them, and it is in the box.",
-    "One socket powers both. Only the active speaker plugs in."
-  ],
   "image_alt": "Two ceiling speakers set flush into a curved plaster ceiling, one on the left and one further along to the right, with an arched window in the corner below.",
   "active": {
     "title": "Active speaker",

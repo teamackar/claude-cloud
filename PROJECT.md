@@ -94,6 +94,14 @@ Policy pages.
 - **"Proof / Founder Story"**: real installations or the founder and factory.
   Sits between Inside The Speaker and FAQ.
 
+## FAQ requirements
+
+- The FAQ must carry the mains socket point, since How It Works no longer
+  shows it on mobile. The question is already planned ("Do I need an
+  electrician?") and its answer must state plainly that the adaptor needs
+  a mains socket, that the socket is not supplied, and that an electrician
+  is needed if the ceiling does not have one.
+
 ## Decisions made, with reasoning
 
 - Static site built with Eleventy using Liquid templates. Liquid is what

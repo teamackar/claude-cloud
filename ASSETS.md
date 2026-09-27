@@ -26,6 +26,12 @@ Never version in the filename.
 Keep this convention for all new art. Wide or portrait is decided by the
 source's own proportions (wider than tall = wide).
 
+## Upscaling
+
+Upscayl, Digital Art model, 2x, PNG output. No sharpening, no
+post-processing. Sources go into /art at the upscaled size; npm run images
+produces everything under /assets.
+
 ## Generating outputs
 
 `npm run images` turns everything in `/art` into `/assets` at the widths
