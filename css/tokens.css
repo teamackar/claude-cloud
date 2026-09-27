@@ -21,6 +21,8 @@
                  layout (wide diagrams, side-by-side columns). The complement of
                  compact's width rule.
      hiw-lede    (min-width: 1200px)  How It Works lede moves inside the image.
+     fya-*       Find Your Animal scroll row: 500, 700 and 900px change how many
+                 cards show; (min-width: 1200px) switches to four across.
    ========================================================================== */
 
 :root {
@@ -113,9 +115,40 @@
   --ui-bg: var(--cream);
 }
 
+/* Cream surface: the page default, for an element inside an ivory section
+   that needs to return to Cream. Every light-surface value holds. */
+[data-surface="sand"] {
+  --ui-bg: var(--sand);
+}
+
+/* Warm sand surface: a scoped exception. --border is otherwise a line and
+   illustration colour, never a text background. Used only by the Weaver Bird
+   card in Find Your Animal. Terracotta fails here (2.69:1) and Muted Olive
+   fails (2.78:1), so nothing on this surface resolves to either. */
+[data-surface="warm-sand"] {
+  --ui-bg: var(--border);
+  --ui-text: var(--ink);             /* 7.59:1 */
+  --ui-text-secondary: var(--ink-soft); /* 5.20:1 */
+  --ui-caption: var(--ink-soft);
+  --ui-border: var(--border-strong);
+  --ui-border-strong: var(--ink-soft);
+
+  --btn-bg: var(--ink);
+  --btn-bg-hover: var(--ink-soft);
+  --btn-text: var(--cream);
+
+  --link: var(--ink);
+  --link-hover: var(--ink-soft);
+  --link-underline: rgb(var(--ink-rgb) / .4);
+  --focus-ring: var(--ink);
+}
+
 /* Dark surface: set data-surface="dark" on a section root.
-   Terracotta fails on forest (2.26:1), so it is never a fill or text colour here. */
-[data-surface="dark"] {
+   Terracotta fails on forest (2.26:1), so it is never a fill or text colour here.
+   data-surface="dark-olive" is the same surface on --dark-alt; its mixes are
+   re-based below so they stay relative to the colour actually behind them. */
+[data-surface="dark"],
+[data-surface="dark-olive"] {
   --ui-bg: var(--forest);
   --ui-text: var(--cream);
   --ui-text-secondary: color-mix(in srgb, var(--cream) 75%, var(--forest));
@@ -132,4 +165,12 @@
   --link-hover: var(--border);
   --link-underline: rgb(var(--cream-rgb) / .4);
   --focus-ring: var(--cream);
+}
+
+[data-surface="dark-olive"] {
+  --ui-bg: var(--dark-alt);
+  --ui-text-secondary: color-mix(in srgb, var(--cream) 75%, var(--dark-alt)); /* 6.51:1 */
+  --ui-caption: color-mix(in srgb, var(--cream) 75%, var(--dark-alt));
+  --ui-border: color-mix(in srgb, var(--cream) 20%, var(--dark-alt));
+  --ui-border-strong: color-mix(in srgb, var(--cream) 45%, var(--dark-alt));
 }

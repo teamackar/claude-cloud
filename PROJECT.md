@@ -77,11 +77,16 @@ exists). Dealer enquiries. Support. Contact. Newsletter capture. Social
 links. Company details including GST, LLP registration and made in India.
 Policy pages.
 
+## Build status
+
+Built: Hero, How It Works, Find Your Animal (placeholder art, final
+artwork to replace it), Footer. Next section: The Listening Moment.
+
 ## Home page section order
 
 1. Hero (built)
 2. How It Works
-3. Find Your Animal
+3. Find Your Animal (built, placeholder art)
 4. The Listening Moment
 5. Inside The Speaker
 6. FAQ

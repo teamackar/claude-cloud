@@ -5,7 +5,7 @@ description: Ceiling speakers designed for spaces worth living in. Sold in pairs
 # Mirrors --ceiling in css/tokens.css. Meta tags cannot read CSS variables; keep in sync.
 theme_color: "#DDB898"
 has_hero: true
-page_css: [home, how-it-works]
+page_css: [home, how-it-works, find-your-animal]
 page_js: [how-it-works]
 head_extra: |
     <!-- Preload whichever hero image this viewport will actually use -->
@@ -44,3 +44,5 @@ head_extra: |
     {%- comment -%} Parked: "Why It Is Different" goes here, before How It Works. When it lands, move id="next" onto it. {%- endcomment %}
 
     {% render "sections/how-it-works.liquid", copy: how_it_works, product: product, manifest: manifest %}
+
+    {% render "sections/find-your-animal.liquid", copy: animals, manifest: manifest %}

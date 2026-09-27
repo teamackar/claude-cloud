@@ -1,0 +1,166 @@
+/* Find Your Animal — self-contained section. Root: .find-your-animal.
+   Ivory surface (data-surface="ivory"); reads the semantic layer only. Each
+   text panel carries its own data-surface from _data/animals.json, so its
+   colours come from tokens.css. No gradient or blend between illustration
+   and panel: the edge where they meet is meant to show.
+
+   A passive read: the only interaction is the link. Hover underlines the
+   card title in the panel's own text colour, so nothing turns terracotta.
+
+   Breakpoints (mobile first):
+   - below 1200px   one horizontal row with scroll-snap. Card width is a
+                    fraction of the section, so a partial card always shows
+                    at the right edge: 1.25 cards visible below 500px, 1.7
+                    from 500px, 2.4 from 700px, 3.2 from 900px.
+   - from 1200px    four across, no scrolling. Content caps at 1600px. */
+
+.find-your-animal {
+  container-type: inline-size;
+  --fya-gap: var(--space-16);
+  --fya-visible: 1.25;
+  /* How It Works ends at its illustration on phones, so this section
+     supplies its own top space there. */
+  padding-block: var(--space-72);
+}
+
+.find-your-animal .fya-h {
+  max-width: 1600px;
+  margin: 0 auto var(--space-32);
+  padding-inline: var(--gutter);
+  font-size: var(--fs-heading);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ui-text);
+}
+
+/* ---------- Row: scrolls below 1200px ---------- */
+
+.find-your-animal .fya-row {
+  display: flex;
+  gap: var(--fya-gap);
+  margin: 0;
+  /* Block padding keeps the focus ring inside the scrollport */
+  padding: var(--space-8) var(--gutter);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border-strong) transparent;
+}
+
+.find-your-animal .fya-item {
+  flex: 0 0 auto;
+  width: calc((100cqi - var(--gutter)) / var(--fya-visible) - var(--fya-gap));
+  scroll-snap-align: start;
+}
+
+@media (min-width: 500px) { .find-your-animal { --fya-visible: 1.7; } }
+@media (min-width: 700px) { .find-your-animal { --fya-visible: 2.4; } }
+@media (min-width: 900px) { .find-your-animal { --fya-visible: 3.2; } }
+
+/* ---------- Card ---------- */
+
+.find-your-animal .fya-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--ui-border);
+  color: inherit;
+}
+.find-your-animal .fya-card:hover { color: inherit; }
+.find-your-animal .fya-card:focus-visible {
+  /* The ring sits outside the card, on the section's ivory: charcoal
+     measures 14.04:1 there and keeps terracotta off every card. */
+  outline: 2px solid var(--ui-text);
+  outline-offset: 4px;
+  border-radius: 0;
+}
+
+.find-your-animal .fya-media {
+  display: block;
+  aspect-ratio: 3 / 4;
+}
+.find-your-animal .fya-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.find-your-animal .fya-media.asset-placeholder { border-radius: 0; border: 0; }
+
+.find-your-animal .fya-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-24) var(--space-24) var(--space-32);
+}
+
+.find-your-animal .fya-title { margin: 0; font-weight: inherit; }
+
+.find-your-animal .fya-name {
+  display: block;
+  margin-bottom: var(--space-12);
+  font-size: var(--fs-12);
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ui-text-secondary);
+}
+
+.find-your-animal .fya-line {
+  display: block;
+  font-size: var(--fs-22);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--ui-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.find-your-animal .fya-card:hover .fya-line { text-decoration-line: underline; }
+
+.find-your-animal .fya-body {
+  margin: var(--space-16) 0 0;
+  font-size: var(--fs-15);
+  line-height: 1.6;
+  color: var(--ui-text-secondary);
+  text-wrap: pretty;
+}
+
+/* Pinned to the panel's foot so the four support lines align */
+.find-your-animal .fya-support {
+  margin: auto 0 0;
+  padding-top: var(--space-24);
+  font-size: var(--fs-14);
+  line-height: 1.5;
+  color: var(--ui-text);
+  text-wrap: pretty;
+}
+
+/* ---------- From 768px How It Works supplies the space above ---------- */
+
+@media (min-width: 768px) {
+  .find-your-animal { padding-top: 0; }
+  .find-your-animal .fya-h { margin-bottom: var(--space-48); }
+}
+
+@media (min-width: 1081px) {
+  .find-your-animal { padding-bottom: var(--space-120); }
+}
+
+/* ---------- Four across ---------- */
+
+@media (min-width: 1200px) {
+  .find-your-animal .fya-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    --fya-gap: var(--space-24);
+    max-width: 1600px;
+    margin-inline: auto;
+    overflow: visible;
+  }
+  .find-your-animal .fya-item { width: auto; }
+}

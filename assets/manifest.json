@@ -106,35 +106,111 @@
     "find-your-animal": [
       {
         "name": "animal-cat-card",
-        "status": "missing",
+        "status": "placeholder",
         "shape": "portrait",
         "format": "png",
         "ratio": "3:4",
-        "min_source": "1440x1920"
+        "min_source": "1440x1920",
+        "source": {
+          "file": "art/animal-cat-card.png",
+          "dimensions": "1086x1448"
+        },
+        "outputs": [
+          {
+            "file": "assets/animal-cat-card-900.webp",
+            "dimensions": "900x1200"
+          },
+          {
+            "file": "assets/animal-cat-card-1440.webp",
+            "dimensions": "1086x1448"
+          },
+          {
+            "file": "assets/animal-cat-card.jpg",
+            "dimensions": "1000x1333"
+          }
+        ],
+        "notes": "Placeholder art, replaced by final artwork later. Source is below min_source, so the -1440 output is really 1086px wide. The card reads the true widths from outputs[].dimensions for its srcset, so update them when the final master lands."
       },
       {
         "name": "animal-weaver-bird-card",
-        "status": "missing",
+        "status": "placeholder",
         "shape": "portrait",
         "format": "png",
         "ratio": "3:4",
-        "min_source": "1440x1920"
+        "min_source": "1440x1920",
+        "source": {
+          "file": "art/animal-weaver-bird-card.png",
+          "dimensions": "1086x1448"
+        },
+        "outputs": [
+          {
+            "file": "assets/animal-weaver-bird-card-900.webp",
+            "dimensions": "900x1200"
+          },
+          {
+            "file": "assets/animal-weaver-bird-card-1440.webp",
+            "dimensions": "1086x1448"
+          },
+          {
+            "file": "assets/animal-weaver-bird-card.jpg",
+            "dimensions": "1000x1333"
+          }
+        ],
+        "notes": "Placeholder art, replaced by final artwork later. Source is below min_source, so the -1440 output is really 1086px wide. The card reads the true widths from outputs[].dimensions for its srcset, so update them when the final master lands."
       },
       {
         "name": "animal-elephant-card",
-        "status": "missing",
+        "status": "placeholder",
         "shape": "portrait",
         "format": "png",
         "ratio": "3:4",
-        "min_source": "1440x1920"
+        "min_source": "1440x1920",
+        "source": {
+          "file": "art/animal-elephant-card.png",
+          "dimensions": "1086x1448"
+        },
+        "outputs": [
+          {
+            "file": "assets/animal-elephant-card-900.webp",
+            "dimensions": "900x1200"
+          },
+          {
+            "file": "assets/animal-elephant-card-1440.webp",
+            "dimensions": "1086x1448"
+          },
+          {
+            "file": "assets/animal-elephant-card.jpg",
+            "dimensions": "1000x1333"
+          }
+        ],
+        "notes": "Placeholder art, replaced by final artwork later. Source is below min_source, so the -1440 output is really 1086px wide. The card reads the true widths from outputs[].dimensions for its srcset, so update them when the final master lands."
       },
       {
         "name": "animal-zebra-card",
-        "status": "missing",
+        "status": "placeholder",
         "shape": "portrait",
         "format": "png",
         "ratio": "3:4",
-        "min_source": "1440x1920"
+        "min_source": "1440x1920",
+        "source": {
+          "file": "art/animal-zebra-card.png",
+          "dimensions": "1086x1448"
+        },
+        "outputs": [
+          {
+            "file": "assets/animal-zebra-card-900.webp",
+            "dimensions": "900x1200"
+          },
+          {
+            "file": "assets/animal-zebra-card-1440.webp",
+            "dimensions": "1086x1448"
+          },
+          {
+            "file": "assets/animal-zebra-card.jpg",
+            "dimensions": "1000x1333"
+          }
+        ],
+        "notes": "Placeholder art, replaced by final artwork later. Source is below min_source, so the -1440 output is really 1086px wide. The card reads the true widths from outputs[].dimensions for its srcset, so update them when the final master lands."
       }
     ],
     "listening-moment": [

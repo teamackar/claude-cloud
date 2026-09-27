@@ -1,0 +1,42 @@
+{
+  "_note": "Find Your Animal cards, in display order. Every card links to /product. image is the asset name in assets/manifest.json (find-your-animal); the partial reads its outputs from there. surface is a data-surface value from css/tokens.css: sand, warm-sand (this section only, never terracotta on it), dark, dark-olive. Swapping an animal means editing this file and the art only.",
+  "heading": "Find your animal",
+  "cards": [
+    {
+      "id": "cat",
+      "name": "The Cat",
+      "title": "For slow mornings and quiet evenings",
+      "body": "Music on low while the coffee brews. A book, a slow Sunday, the last hour before bed. You are not filling the room, you are softening it.",
+      "support": "Holds its detail at low volume. A coaxial driver and a proper crossover keep music clear when it is barely on.",
+      "image": "animal-cat-card",
+      "surface": "sand"
+    },
+    {
+      "id": "weaver-bird",
+      "name": "The Weaver Bird",
+      "title": "For people who are always making something",
+      "body": "The desk, the workbench, the studio table. Hands busy, music on for hours, and never anywhere near your phone to change it.",
+      "support": "Nothing on the desk. Nothing to knock over. Nothing to charge.",
+      "image": "animal-weaver-bird-card",
+      "surface": "warm-sand"
+    },
+    {
+      "id": "elephant",
+      "name": "The Elephant",
+      "title": "For the house where everyone gathers",
+      "body": "Sunday lunch. Cousins arriving. Three generations in one room and nobody sitting still.",
+      "support": "Sound from above fills a room evenly, instead of pointing at whoever got the good seat.",
+      "image": "animal-elephant-card",
+      "surface": "dark"
+    },
+    {
+      "id": "zebra",
+      "name": "The Zebra",
+      "title": "For the host",
+      "body": "Dinner that turns into drinks. People standing, moving, talking over each other, and the music holding it together.",
+      "support": "Six to ten feet apart gives you real stereo across the whole room. Nobody ends up shouting next to a speaker.",
+      "image": "animal-zebra-card",
+      "surface": "dark-olive"
+    }
+  ]
+}

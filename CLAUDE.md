@@ -45,6 +45,14 @@ and the reasoning in "Technical".
 - New section CSS references only the semantic layer (--ui-*, --btn-*,
   --link, --focus-ring), never raw palette tokens. Mark dark section roots
   with data-surface="dark" and the semantic layer inverts itself.
+- Warm sand (--border) is a line and illustration colour, never a text
+  background, with one scoped exception: the Weaver Bird card in Find Your
+  Animal (data-surface="warm-sand"). Charcoal text only there. Terracotta
+  (2.69:1) and --muted (2.78:1) fail on it and must never appear on it.
+- Surfaces available to section roots and panels: ivory, sand, warm-sand
+  (Weaver Bird card only), dark, dark-olive. All defined in tokens.css.
+- No white gradients, washes or scrims anywhere. The client rejected them.
+- Jost is the only typeface.
 - palette.html shows every token with measured contrast. Check it after
   any token change.
 
@@ -58,6 +66,8 @@ and the reasoning in "Technical".
 - Never link a PNG from /art directly. Each is about 5x the page budget.
 - Never deploy /design. It pulls React, ReactDOM and Babel, about 3MB.
 - Never write copy implying single speakers are sold.
+- Never write copy suggesting bathrooms, kitchens near water or anywhere
+  with moisture. Dry indoor only.
 
 ## Always
 

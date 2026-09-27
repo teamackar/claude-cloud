@@ -43,6 +43,18 @@ width, and warns if any single output is over 250KB. SVGs are copied as-is.
 - `npm run images -- --force` re-encodes existing outputs. Do not use it on
   approved art without checking the result.
 
+## Find Your Animal cards
+
+`animal-cat-card`, `animal-weaver-bird-card`, `animal-elephant-card`,
+`animal-zebra-card`. Portrait, 3:4, standard portrait outputs.
+
+Status: **placeholder**. Current masters are 1086x1448, below the
+1440x1920 minimum, so each `-1440.webp` is really 1086px wide. The card
+builds its srcset from the output dimensions in `manifest.json`, so when
+final art lands: drop the master into /art under the same name, run
+`npm run images -- -card --force`, and update the dimensions and status
+in the manifest. No template change needed.
+
 ## Vector
 
 Layered SVG preferred for anything animated, with meaningful layer ids.

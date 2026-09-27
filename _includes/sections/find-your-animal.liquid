@@ -1,0 +1,56 @@
+{%- comment -%}
+  Find Your Animal. Rendered with: copy (_data/animals.json), manifest
+  (assets/manifest.json).
+  Self-contained: root .find-your-animal, css/find-your-animal.css. No script.
+
+  A passive read, not a quiz: every card is one link to /product, named by
+  its heading. Illustrations are decorative here (alt=""). Each image is
+  looked up in the manifest by the card's image key, and its srcset widths
+  come from the manifest's output dimensions, so placeholder and final art
+  both describe their real size. A missing asset renders a labelled
+  placeholder at 3:4.
+{%- endcomment -%}
+{%- assign entries = manifest.sections["find-your-animal"] -%}
+<section class="find-your-animal" id="find-your-animal" data-surface="ivory" aria-labelledby="fya-heading">
+      <h2 class="fya-h" id="fya-heading" data-editable="fya-heading">{{ copy.heading }}</h2>
+
+      <ul class="fya-row" role="list">
+        {%- for card in copy.cards %}
+        {%- assign entry = entries | where: "name", card.image | first %}
+        <li class="fya-item">
+          <a class="fya-card" href="/product" aria-labelledby="fya-{{ card.id }}-title">
+            {%- if entry and entry.status != "missing" %}
+            {%- assign srcset = "" %}
+            {%- assign jpg = "" %}
+            {%- for output in entry.outputs %}
+              {%- assign w = output.dimensions | split: "x" | first %}
+              {%- if output.file contains ".webp" %}
+                {%- capture srcset %}{{ srcset }}{% unless srcset == "" %}, {% endunless %}/{{ output.file }} {{ w }}w{% endcapture %}
+              {%- else %}
+                {%- assign jpg = output %}
+              {%- endif %}
+            {%- endfor %}
+            {%- assign jpg_size = jpg.dimensions | split: "x" %}
+            <picture class="fya-media">
+              <source type="image/webp" srcset="{{ srcset }}"
+                      sizes="(min-width: 1200px) min(22vw, 360px), (min-width: 900px) 30vw, (min-width: 700px) 40vw, (min-width: 500px) 57vw, 76vw">
+              <img src="/{{ jpg.file }}" alt="" width="{{ jpg_size[0] }}" height="{{ jpg_size[1] }}" loading="lazy" decoding="async">
+            </picture>
+            {%- else %}
+            <div class="fya-media asset-placeholder" aria-hidden="true">
+              <span class="asset-placeholder-label">{{ card.image }} · 3:4 · missing</span>
+            </div>
+            {%- endif %}
+            <div class="fya-panel" data-surface="{{ card.surface }}">
+              <h3 class="fya-title" id="fya-{{ card.id }}-title">
+                <span class="fya-name" data-editable="fya-{{ card.id }}-name">{{ card.name }}</span>
+                <span class="fya-line" data-editable="fya-{{ card.id }}-title">{{ card.title }}</span>
+              </h3>
+              <p class="fya-body" data-editable="fya-{{ card.id }}-body">{{ card.body }}</p>
+              <p class="fya-support" data-editable="fya-{{ card.id }}-support">{{ card.support }}</p>
+            </div>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
